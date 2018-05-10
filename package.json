@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "workspaces": {
+    "packages": ["examples/*", "shared"],
+    "nohoist": ["**/shared"]
+  },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "@weco/next-plugin-transpile-modules": "0.0.2",
+    "babel-eslint": "8.2.3",
+    "eslint": "4.19.1",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-jest": "21.15.1",
+    "eslint-plugin-react": "7.7.0",
+    "husky": "0.14.3",
+    "jest": "23.0.0-charlie.1",
+    "jest-styled-components": "5.0.1",
+    "lint-staged": "7.0.5",
+    "next-without-jest": "1.0.1",
+    "prettier": "1.12.1",
+    "prettier-package-json": "1.6.0",
+    "snapshot-diff": "0.3.0"
+  },
+  "lint-staged": {
+    "*.js": ["eslint --fix", "prettier --write", "git add"],
+    "*.json": ["prettier --write", "git add"],
+    "*.css": ["prettier --write", "git add"],
+    "*.md": ["prettier --write", "git add"],
+    "**/package.json": ["prettier-package-json --write", "git add"],
+    "**/.babelrc": ["prettier --write", "git add"]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "overrides": [
+      {
+        "files": ".babelrc",
+        "options": {
+          "parser": "json"
+        }
+      }
+    ]
+  },
+  "resolutions": {
+    "jest": "23.0.0-charlie.1",
+    "next": "6.0.1-canary.0",
+    "babel-core": "7.0.0-bridge.0"
+  }
+}

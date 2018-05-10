@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should open and close 1`] = `
+<div>
+  <div>
+    <button
+      data-testid="toggle-modal"
+    />
+  </div>
+</div>
+`;
+
+exports[`should open and close 2`] = `
+<div>
+  <div>
+    <div>
+      Modal content
+    </div>
+    <button
+      data-testid="toggle-modal"
+    />
+  </div>
+</div>
+`;
+
+exports[`should open and close 3`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+  <div>
+    <div>
++     <div>
++       Modal content
++     </div>
+      <button
+        data-testid=\\"toggle-modal\\"
+      />
+    </div>
+  </div>"
+`;

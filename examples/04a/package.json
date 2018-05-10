@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "04a",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "start": "next start",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "next": "6.0.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "shared": "1.0.0"
+  },
+  "devDependencies": {
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "enzyme-to-json": "3.3.3",
+    "jest": "22.4.3",
+    "react-addons-test-utils": "15.6.2"
+  }
+}

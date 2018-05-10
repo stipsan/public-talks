@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Enzyme enzyme-to-json in deep mode App renders correctly 1`] = `
+<div>
+  <p>
+    Hello 
+    ReactJS Oslo!
+    !
+  </p>
+  <footer>
+    © 
+    2018
+     
+    ACME Inc.
+  </footer>
+</div>
+`;
+
+exports[`With Enzyme enzyme-to-json in shallow mode App renders correctly 1`] = `
+<div>
+  <Hello
+    entity="ReactJS Oslo!"
+  />
+  <Footer
+    whoGotAllTheRights="ACME Inc."
+    year={2018}
+  />
+</div>
+`;

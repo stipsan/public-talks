@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should open and close 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`should open and close 2`] = `
+<div>
+  <div>
+    Modal content
+  </div>
+  <button
+    onClick={[Function]}
+  />
+</div>
+`;

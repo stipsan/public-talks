@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Snapshot Testing App renders correctly 1`] = `
+.c0 {
+  background: palevioletred;
+  color: white;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+}
+
+.c1 {
+  background: white;
+  color: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+}
+
+<div>
+  Theme is 
+  Light
+  <button
+    className="c0"
+  />
+  <button
+    className="c1"
+  />
+</div>
+`;
+
+exports[`With Snapshot Testing App renders correctly 2`] = `
+.c1 {
+  background: palevioletred;
+  color: white;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+}
+
+.c3 {
+  background: white;
+  color: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+}
+
+.c0 {
+  background: crimson;
+  color: black;
+  border-color: crimson;
+}
+
+.c2 {
+  background: black;
+  color: crimson;
+  border-color: crimson;
+}
+
+<div>
+  Theme is 
+  Dark
+  <button
+    className="c0 c1"
+  />
+  <button
+    className="c2 c3"
+  />
+</div>
+`;
