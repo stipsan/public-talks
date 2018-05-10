@@ -1,6 +1,6 @@
 # Write tests. Not too many. Mostly integration. Use Jest.
 
-## Meetup organized by ReactJS Oslo at Google Norway
+## [Meetup organized by ReactJS Oslo at Google Norway](https://www.meetup.com/ReactJS-Oslo-Meetup/events/250345909/)
 
 # Instructions
 
