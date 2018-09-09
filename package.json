@@ -1,19 +1,39 @@
 {
   "private": true,
-  
-  "scripts": {
-    "precommit": "npx lint-staged"
-  },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stipsan/public-talks.git"
   },
-  "lint-staged": {
-    "*.js": ["npx prettier --write", "git add"],
-    "*.json": ["npx prettier --write", "git add"],
-    "*.css": ["npx prettier --write", "git add"],
-    "*.md": ["npx prettier --write", "git add"],
-    "package.json": ["npx prettier-package-json --write", "git add"]
+  "scripts": {
+    "precommit": "lint-staged"
   },
-  "license": "MIT"
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2",
+    "prettier-package-json": "^2.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.css": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.md": [
+      "prettier --write",
+      "git add"
+    ],
+    "package.json": [
+      "prettier-package-json --write",
+      "git add"
+    ]
+  }
 }
