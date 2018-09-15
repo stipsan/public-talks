@@ -1,6 +1,12 @@
-// ReactDOM.hydrate
+import ReactDOM from "react-dom";
 
 console.log("Client!!");
 
-import("./pages/index");
-import("./pages/product");
+import Index from "./pages";
+
+ReactDOM.render(
+  <>
+    <Index />
+  </>,
+  document.getElementById("app")
+);

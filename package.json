@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "esm": "^3.0.82",
+    "browserslist-useragent": "^2.0.1",
+    "caniuse-api": "^3.0.0",
     "micro": "^9.3.3",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
