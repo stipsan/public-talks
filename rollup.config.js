@@ -1,11 +1,17 @@
+import babel from "rollup-plugin-babel";
 import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 
 export default {
+  experimentalCodeSplitting: true,
   input: "client.js",
   output: {
-    file: "public/app.js",
+    dir: "public",
     format: "esm"
   },
-  plugins: [resolve({ browser: true }), commonjs()]
+  plugins: [
+    babel({ exclude: "node_modules/**" }),
+    resolve({ browser: true }),
+    commonjs()
+  ]
 };
