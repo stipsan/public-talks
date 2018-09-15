@@ -2,4 +2,5 @@
 
 console.log("Client!!");
 
-import("./pages");
+import("./pages/index");
+import("./pages/product");

@@ -5,17 +5,20 @@
     "type": "git",
     "url": "git+https://github.com/stipsan/public-talks.git"
   },
+  "main": "server.js",
   "scripts": {
     "prebuild": "rm -rf ./public",
     "build": "rollup -c",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "dev": "micro-dev"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "esm": "^3.0.82",
     "micro": "^9.3.3",
     "react": "^16.5.1",
-    "react-dom": "^16.5.1"
+    "react-dom": "^16.5.1",
+    "serve-handler": "^5.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -31,7 +34,8 @@
     "rollup": "^0.65.2",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.1.6",
-    "rollup-plugin-node-resolve": "^3.4.0"
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.0.0"
   },
   "lint-staged": {
     "*.js": [

@@ -1,13 +1,16 @@
 import babel from "rollup-plugin-babel";
 import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
+import replace from "rollup-plugin-replace";
 
 export default {
+  // inlineDynamicImports: true,
   experimentalCodeSplitting: true,
+  optimizeChunks: true,
   input: "client.js",
   output: {
     dir: "public",
-    format: "esm"
+    format: "amd"
   },
   plugins: [
     babel({ exclude: "node_modules/**" }),
@@ -15,11 +18,9 @@ export default {
     commonjs({
       include: /node_modules/,
       namedExports: {
-        // left-hand side can be an absolute path, a path
-        // relative to the current directory, or the name
-        // of a module in node_modules
         "node_modules/react/index.js": ["Component"]
       }
-    })
+    }),
+    replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) })
   ]
 };
