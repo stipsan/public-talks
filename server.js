@@ -23,8 +23,8 @@ module.exports = async (req, res) => {
     });
     console.log(supportsDynamicImport, req.headers["user-agent"]);
     const script = supportsDynamicImport
-      ? '<script type="module" src="/client.mjs"></script>'
-      : '<script src="https://unpkg.com/systemjs/dist/system-production.js"></script><script>SystemJS.import("/client.js");</script>';
+      ? '<script type="module" src="/esm/client.js"></script>'
+      : '<script src="https://unpkg.com/systemjs/dist/system-production.js"></script><script>SystemJS.import("/es5/client.js");</script>';
     return res.end(`<!doctype html>
 <html>
   <head>

@@ -17,7 +17,8 @@ const defaults = {
     commonjs({
       include: /node_modules/,
       namedExports: {
-        "node_modules/react/index.js": ["Component"]
+        [require.resolve("react")]: ["Component", "lazy", "Placeholder"],
+        [require.resolve("react-dom")]: ["unstable_createRoot"]
       }
     }),
     replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) })
@@ -29,12 +30,10 @@ export default [
   {
     ...defaults,
     output: {
-      ...output,
-      format: "esm",
-      entryFileNames: "[name].mjs",
-      chunkFileNames: "[name]-[hash].mjs"
+      dir: "public/esm",
+      format: "esm"
     }
   },
   // the rest
-  { ...defaults, output: { ...output, format: "system" } }
+  { ...defaults, output: { dir: "public/es5", format: "system" } }
 ];

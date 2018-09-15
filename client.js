@@ -1,12 +1,17 @@
-import ReactDOM from "react-dom";
+import { unstable_createRoot } from "react-dom";
+import { lazy, Placeholder } from "react";
 
 console.log("Client!!");
 
-import Index from "./pages";
+const Index = lazy(
+  () =>
+    new Promise(resolve => {
+      setTimeout(() => resolve(import("./pages")), 5000);
+    })
+);
 
-ReactDOM.render(
-  <>
+unstable_createRoot(document.getElementById("app")).render(
+  <Placeholder delayMs={2000} fallback={"Loading…"}>
     <Index />
-  </>,
-  document.getElementById("app")
+  </Placeholder>
 );

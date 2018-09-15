@@ -15,7 +15,7 @@ module.exports = api => {
           },
           modules: false,
           shippedProposals: true,
-          useBuiltIns: "usage"
+          useBuiltIns: "entry"
         }
       ],
       [
