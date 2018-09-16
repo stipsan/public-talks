@@ -1,18 +1,15 @@
-// ReactDOMServer.renderToStream
 const handler = require("serve-handler");
-const useragent = require("useragent");
 const { matchesUA } = require("browserslist-useragent");
 const caniuse = require("caniuse-api");
 
 const support = caniuse.getSupport("es6-module-dynamic-import");
-const browsers = Object.keys(support).reduce((browsers, browser) => {
-  if (support[browser].y) {
-    return [...browsers, `${browser} >= ${support[browser].y}`];
-  }
-
-  return browsers;
-}, []);
-console.log(browsers);
+const browsers = Object.keys(support).reduce(
+  (browsers, browser) =>
+    support[browser].y
+      ? [...browsers, `${browser} >= ${support[browser].y}`]
+      : browsers,
+  []
+);
 
 module.exports = async (req, res) => {
   console.log(req.url);

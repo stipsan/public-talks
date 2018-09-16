@@ -3,10 +3,6 @@ import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 
-const output = {
-  dir: "public"
-};
-
 const defaults = {
   experimentalCodeSplitting: true,
   optimizeChunks: true,
