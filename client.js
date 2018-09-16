@@ -47,5 +47,3 @@ unstable_createRoot(document.getElementById("root")).render(
     </Placeholder>
   </Main>
 );
-
-window.Test = React;

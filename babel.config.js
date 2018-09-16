@@ -5,13 +5,21 @@ module.exports = api => {
     presets: [
       [
         "@babel/preset-env",
-        { modules: false, shippedProposals: true, useBuiltIns: "entry" }
+        {
+          loose: true,
+          modules: false,
+          shippedProposals: true,
+          useBuiltIns: "entry"
+        }
       ],
       [
         "@babel/preset-react",
         { useBuiltIns: true, development: !api.env("production") }
       ]
     ],
-    plugins: ["@babel/plugin-syntax-dynamic-import"]
+    plugins: [
+      "@babel/plugin-syntax-dynamic-import",
+      ["@babel/plugin-proposal-class-properties", { loose: true }]
+    ]
   };
 };
