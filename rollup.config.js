@@ -30,6 +30,7 @@ const config = { experimentalCodeSplitting: true, input: "client.js", plugins };
 
 export default [
   // bundle for browsers that support dynamic import() natively
+  // @TODO babel config should avoid transpiling features that these browsers support natively
   { ...config, output: { dir: "public/esm", format: "esm" } },
   // the rest
   { ...config, output: { dir: "public/es5", format: "system" } }

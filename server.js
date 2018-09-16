@@ -37,13 +37,14 @@ const htmlHandler = (req, res) => {
 };
 
 module.exports = async (req, res) => {
-  switch (accepts(req).type(["js", "css", "json", "html"])) {
-    case "js":
-    case "css":
-      return serveHandler(req, res, {
-        public: "public",
-        directoryListing: false
-      });
+  if (req.url.endsWith(".js") || req.url.endsWith(".css")) {
+    return serveHandler(req, res, {
+      public: "public",
+      directoryListing: false
+    });
+  }
+
+  switch (accepts(req).type(["json", "html"])) {
     case "json":
       return { "@TODO": "implement API" };
     case "html":
