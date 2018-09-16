@@ -1,0 +1,46 @@
+:root {
+  --fontSize: 1rem;
+  --spacing: 1rem;
+  --fontColor: #363636;
+  --backgroundColor: white;
+  --backgroundColorSemi: color-mod(var(--backgroundColor) alpha(50%));
+  --primaryColor: #3273dc;
+  --primaryColorSemi: color-mod(var(--primaryColor) alpha(25%));
+  --dangerColor: #ff3860;
+  --dangerColorSemi: color-mod(var(--dangerColor) alpha(25%));
+}
+
+::before,
+::after,
+* {
+  box-sizing: inherit;
+}
+
+html {
+  background: var(--backgroundColor);
+  box-sizing: border-box;
+  font-family: system-ui;
+}
+
+body {
+  align-items: center;
+  color: var(--fontColor);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fontSize);
+  font-weight: 400;
+  justify-content: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

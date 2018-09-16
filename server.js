@@ -2,6 +2,7 @@ const serveHandler = require("serve-handler");
 const { matchesUA } = require("browserslist-useragent");
 const caniuse = require("caniuse-api");
 const accepts = require("accepts");
+const { send } = require("micro");
 
 const support = caniuse.getSupport("es6-module-dynamic-import");
 const browsers = Object.keys(support).reduce(
@@ -17,13 +18,6 @@ const htmlHandler = (req, res) => {
     browsers,
     allowHigherVersions: true
   });
-  console.log(
-    "supports",
-    browsers,
-    req.headers["user-agent"],
-    supportsDynamicImport,
-    browsers
-  );
   const script = supportsDynamicImport
     ? '<script async type="module" src="/esm/client.js"></script>'
     : '<script src="https://unpkg.com/systemjs/dist/system-production.js"></script><script>SystemJS.import("/es5/client.js");</script>';
@@ -32,7 +26,7 @@ const htmlHandler = (req, res) => {
 <head>
   <meta charset=utf-8>
   <meta content="width=device-width" name=viewport>
-  <link rel="SHORTCUT ICON" href="/favicon.ico?v2" type="image/x-icon"/>
+  <link rel="stylesheet" href="/client.css" type="text/css"/>
 </head>
 <body>
   <div id="root"></div>
@@ -41,7 +35,6 @@ const htmlHandler = (req, res) => {
 </html>
   `;
 };
-const { send } = require("micro");
 
 module.exports = async (req, res) => {
   switch (accepts(req).type(["js", "css", "json", "html"])) {
