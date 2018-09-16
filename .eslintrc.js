@@ -13,9 +13,9 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:unicorn/recommended",
-    "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
+    "plugin:react/recommended",
     "prettier",
     "prettier/react"
   ],
@@ -40,7 +40,8 @@ module.exports = {
     "react/no-typos": ["error"],
     "react/no-unused-prop-types": ["error", { skipShapeProps: true }],
     "react/no-unused-state": ["error"],
-    "react/react-in-jsx-scope": ["off"],
+    "react/prop-types": ["warn"],
+    "react/react-in-jsx-scope": ["error"],
     "react/style-prop-object": ["error"]
   }
 };

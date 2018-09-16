@@ -3,12 +3,10 @@ import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 
-const defaults = {
+export default {
   experimentalCodeSplitting: true,
-  optimizeChunks: true,
   input: "client.js",
   plugins: [
-    babel({ exclude: "node_modules/**" }),
     resolve({ browser: true }),
     commonjs({
       include: /node_modules/,
@@ -17,19 +15,18 @@ const defaults = {
         [require.resolve("react-dom")]: ["unstable_createRoot"]
       }
     }),
-    replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) })
+    replace({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      // reach/router is trying to use this API but it got removed in react 16.5
+      "ReactDOM.unstable_deferredUpdates":
+        "typeof requestIdleCallback != 'undefined' ? requestIdleCallback : requestAnimationFrame"
+    }),
+    babel({ exclude: "node_modules/**" })
+  ],
+  output: [
+    // bundle for browsers that support dynamic import() natively
+    { dir: "public/esm", format: "esm" },
+    // the rest
+    { dir: "public/es5", format: "system" }
   ]
 };
-
-export default [
-  // bundle for browsers that support dynamic import() natively
-  {
-    ...defaults,
-    output: {
-      dir: "public/esm",
-      format: "esm"
-    }
-  },
-  // the rest
-  { ...defaults, output: { dir: "public/es5", format: "system" } }
-];

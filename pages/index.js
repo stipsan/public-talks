@@ -1,8 +1,8 @@
 // list over stuff
-import { Component } from "react";
+import React, { Component } from "react";
 
 export default class Index extends Component {
   render() {
-    return <>Foobar</>;
+    return <span>Foobar</span>;
   }
 }

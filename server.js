@@ -20,17 +20,17 @@ module.exports = async (req, res) => {
     });
     console.log(supportsDynamicImport, req.headers["user-agent"]);
     const script = supportsDynamicImport
-      ? '<script type="module" src="/esm/client.js"></script>'
+      ? '<script async type="module" src="/esm/client.js"></script>'
       : '<script src="https://unpkg.com/systemjs/dist/system-production.js"></script><script>SystemJS.import("/es5/client.js");</script>';
     return res.end(`<!doctype html>
 <html>
   <head>
     <meta charset=utf-8>
     <meta content="width=device-width" name=viewport>
-    ${script}
   </head>
   <body>
     <div id="root"></div>
+    ${script}
   </body>
 </html>
     `);

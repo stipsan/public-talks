@@ -1,8 +1,8 @@
 // detail page
-import { Component } from "react";
+import React, { Component } from "react";
 
 export default class Product extends Component {
   render() {
-    return <>Product</>;
+    return <span>Product</span>;
   }
 }

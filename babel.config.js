@@ -5,27 +5,13 @@ module.exports = api => {
     presets: [
       [
         "@babel/preset-env",
-        {
-          targets: {
-            browsers: [
-              "last 1 chrome version",
-              "last 1 firefox version",
-              "last 1 safari version"
-            ]
-          },
-          modules: false,
-          shippedProposals: true,
-          useBuiltIns: "entry"
-        }
+        { modules: false, shippedProposals: true, useBuiltIns: "entry" }
       ],
       [
         "@babel/preset-react",
         { useBuiltIns: true, development: !api.env("production") }
       ]
     ],
-    plugins: [
-      "babel-plugin-react-require",
-      "@babel/plugin-syntax-dynamic-import"
-    ]
+    plugins: ["@babel/plugin-syntax-dynamic-import"]
   };
 };
