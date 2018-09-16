@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "@reach/router": "^1.1.1",
     "browserslist-useragent": "^2.0.1",
     "caniuse-api": "^3.0.0",
     "micro": "^9.3.3",
@@ -32,7 +33,7 @@
     "micro-dev": "^3.0.0",
     "prettier": "^1.14.2",
     "prettier-package-json": "^2.0.0",
-    "rollup": "^0.65.2",
+    "rollup": "^0.66.0",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.1.6",
     "rollup-plugin-node-resolve": "^3.4.0",
