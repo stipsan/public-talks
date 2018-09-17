@@ -2,7 +2,8 @@ import "@babel/polyfill";
 
 import { unstable_createRoot } from "react-dom";
 import React, { lazy, Placeholder } from "react";
-import { Router, Link } from "@reach/router";
+import { Router, Link, Location } from "@reach/router";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const Header = props => <header {...props} />;
 
@@ -19,10 +20,10 @@ const Main = ({ children }) => (
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="checkout">Checkout</Link>
+        <Link to="selection">Checkout</Link>
       </li>
       <li>
-        <Link to="fancy-product">Fancy product</Link>
+        <Link to="product/fancy-product">Fancy product</Link>
       </li>
     </ul>
     <hr />
@@ -36,14 +37,34 @@ const Product = lazy(() => import("./pages/product"));
 
 const RootFallback = "Loading...";
 
+const FadeTransitionRouter = props => (
+  <Location>
+    {({ location }) => (
+      <TransitionGroup component={null}>
+        <CSSTransition
+          key={location.key}
+          classNames={`slide-${
+            location.pathname.startsWith("/product/") ? "left" : "right"
+          }`}
+          timeout={5000}
+        >
+          <Router location={location} className="router">
+            {props.children}
+          </Router>
+        </CSSTransition>
+      </TransitionGroup>
+    )}
+  </Location>
+);
+
 unstable_createRoot(document.getElementById("root")).render(
   <Main path="/">
     <Placeholder delayMs={0} fallback={RootFallback}>
-      <Router>
+      <FadeTransitionRouter>
         <Index default />
-        <Checkout path="checkout" />
-        <Product path=":slug" />
-      </Router>
+        <Checkout path="selection" />
+        <Product path="product/:slug" />
+      </FadeTransitionRouter>
     </Placeholder>
   </Main>
 );
