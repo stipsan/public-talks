@@ -37,6 +37,13 @@ const htmlHandler = (req, res) => {
 };
 
 module.exports = async (req, res) => {
+  if (req.url.startsWith("/assets/")) {
+    return serveHandler(req, res, {
+      public: "assets",
+      directoryListing: false
+    });
+  }
+
   if (req.url.endsWith(".js") || req.url.endsWith(".css")) {
     return serveHandler(req, res, {
       public: "public",
