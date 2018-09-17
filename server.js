@@ -40,7 +40,8 @@ module.exports = async (req, res) => {
   if (req.url.startsWith("/assets/")) {
     return serveHandler(req, res, {
       public: "assets",
-      directoryListing: false
+      directoryListing: false,
+      rewrites: [{ source: "/assets/:id", destination: "/:id" }]
     });
   }
 

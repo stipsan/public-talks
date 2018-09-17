@@ -1,8 +1,8 @@
 :root {
   --fontSize: 1rem;
   --spacing: 1rem;
-  --fontColor: #363636;
-  --backgroundColor: white;
+  --fontColor: #fff;
+  --backgroundColor: #827373;
   --backgroundColorSemi: color-mod(var(--backgroundColor) alpha(50%));
   --primaryColor: #3273dc;
   --primaryColorSemi: color-mod(var(--primaryColor) alpha(25%));
@@ -43,4 +43,39 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+}
+
+.background-video {
+  transform-style: none;
+  z-index: -1;
+  position: fixed;
+  left: 41.5%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 58.5%;
+  background: #000;
+  background-image: none;
+  transition: transform 0.8s, opacity 0.3s;
+  overflow: hidden;
+}
+.background-video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+
+  transition: -webkit-filter 0.8s, filter 0.8s;
+
+  filter: blur(100px);
+}
+
+:matches(.slide-right-enter-done, .slide-right-enter.slide-right-enter-active, .slide-right-appear)
+  ~ .background-video {
+  transform: translateX(-141.5%) translateX(100px);
 }

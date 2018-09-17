@@ -9,7 +9,8 @@ const Header = props => <header {...props} />;
 
 const Footer = props => <footer {...props} />;
 
-// reach/router needs to render to know the route
+// @TODO remove this
+const ENABLE_AUTOPLAY = false;
 
 const Main = ({ children }) => (
   <div>
@@ -28,6 +29,17 @@ const Main = ({ children }) => (
     </ul>
     <hr />
     {children}
+    <div className="background-video">
+      <video
+        loop
+        autoPlay={ENABLE_AUTOPLAY}
+        playsInline
+        muted
+        webkit-playsinline="true"
+      >
+        <source src="/assets/BO-BG-final.mp4" type="video/mp4" />
+      </video>
+    </div>
     <Footer />
   </div>
 );
@@ -40,13 +52,13 @@ const RootFallback = "Loading...";
 const FadeTransitionRouter = props => (
   <Location>
     {({ location }) => (
-      <TransitionGroup component={null}>
+      <TransitionGroup appear component={null}>
         <CSSTransition
           key={location.key}
           classNames={`slide-${
-            location.pathname.startsWith("/product/") ? "left" : "right"
+            location.pathname.endsWith("/selection") ? "right" : "left"
           }`}
-          timeout={5000}
+          timeout={800}
         >
           <Router location={location} className="router">
             {props.children}
