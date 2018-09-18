@@ -103,11 +103,51 @@ textarea {
   transform: translateX(0);
 }
 
+@keyframes test {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 .router {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
   overflow: auto;
+  transition: all 0.8s;
+  transform: translateX(0%);
+}
+.router-enter {
+  transform: translateX(-100%);
+}
+.router-enter.router-enter-active {
+  transform: translateX(0) !important;
+}
+.router-exit.router-exit-active {
+  transform: translateX(-100%);
+}
+.router-exit {
+  transform: translateX(0);
+}
+
+:first-of-type:not(:last-of-type):matches(.product-route, .index-route) {
+  transform: translateX(-100%);
+}
+.product-route.router-enter-done,
+.product-route.router-enter-active,
+.index-route.router-enter-done,
+.index-route.router-enter-active {
+  transform: translateX(0);
+}
+
+.product-route,
+.selection-route {
+  z-index: 1;
 }
 
 .hero {
@@ -131,4 +171,19 @@ textarea {
   line-height: normal;
   margin: 20px 0 0;
   max-width: none;
+}
+
+.product-background {
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+  max-width: 1400px;
+  width: calc(100% - 200px);
+  background-color: #fff;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.product-background ul {
+  margin: 0;
 }

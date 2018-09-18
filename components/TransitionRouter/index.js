@@ -10,7 +10,8 @@ const TransitionRouter = props => (
         <CSSTransition key={location.key} classNames="router" timeout={800}>
           <Router
             location={location}
-            className={cx('router',{
+            component="section"
+            className={cx("router", {
               "index-route": location.pathname === "/",
               "product-route": location.pathname.startsWith("/product"),
               "selection-route": location.pathname.endsWith("/selection")

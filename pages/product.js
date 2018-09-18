@@ -6,14 +6,16 @@ export default class Product extends Component {
   render() {
     return (
       <>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="selection">Checkout</Link>
-          </li>
-        </ul>
+        <div className="product-background">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/selection">Checkout</Link>
+            </li>
+          </ul>
+        </div>
       </>
     );
   }

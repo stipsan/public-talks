@@ -2,9 +2,7 @@ import "@babel/polyfill";
 
 import { unstable_createRoot } from "react-dom";
 import React, { lazy, Placeholder } from "react";
-import { Link } from "@reach/router";
 import TransitionRouter from "./components/TransitionRouter";
-
 
 const Footer = props => <footer {...props} />;
 
@@ -13,19 +11,6 @@ const ENABLE_AUTOPLAY = false;
 
 const Main = ({ children }) => (
   <>
-    <h1>Welcome to the App!</h1>
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="selection">Checkout</Link>
-      </li>
-      <li>
-        <Link to="product/fancy-product">Fancy product</Link>
-      </li>
-    </ul>
-    <hr />
     {children}
     <div className="background-video">
       <video
