@@ -102,3 +102,33 @@ textarea {
   ~ .selection-background {
   transform: translateX(0);
 }
+
+.router {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+.hero .copy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  transform: translate(-50%, -60%);
+}
+.hero .copy h5 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.hero .copy h1 {
+  font-size: calc(100vw / 24.381);
+  line-height: normal;
+  margin: 20px 0 0;
+  max-width: none;
+}

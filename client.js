@@ -5,7 +5,6 @@ import React, { lazy, Placeholder } from "react";
 import { Link } from "@reach/router";
 import TransitionRouter from "./components/TransitionRouter";
 
-const Header = props => <header {...props} />;
 
 const Footer = props => <footer {...props} />;
 
@@ -13,8 +12,7 @@ const Footer = props => <footer {...props} />;
 const ENABLE_AUTOPLAY = false;
 
 const Main = ({ children }) => (
-  <div>
-    <Header />
+  <>
     <h1>Welcome to the App!</h1>
     <ul>
       <li>
@@ -42,7 +40,7 @@ const Main = ({ children }) => (
     </div>
     <div className="selection-background" />
     <Footer />
-  </div>
+  </>
 );
 const Index = lazy(() => import("./pages/index"));
 const Checkout = lazy(() => import("./pages/checkout"));
