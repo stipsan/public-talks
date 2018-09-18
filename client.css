@@ -4,6 +4,7 @@
   --fontColor: #fff;
   --backgroundColor: #827373;
   --backgroundColorSemi: color-mod(var(--backgroundColor) alpha(50%));
+  --selectionBackground: #142537;
   --primaryColor: #3273dc;
   --primaryColorSemi: color-mod(var(--primaryColor) alpha(25%));
   --dangerColor: #ff3860;
@@ -47,7 +48,7 @@ textarea {
 
 .background-video {
   transform-style: none;
-  z-index: -1;
+  z-index: -2;
   position: fixed;
   left: 41.5%;
   top: 0;
@@ -58,6 +59,7 @@ textarea {
   background-image: none;
   transition: transform 0.8s, opacity 0.3s;
   overflow: hidden;
+  contain: strict;
 }
 .background-video video {
   position: absolute;
@@ -75,7 +77,28 @@ textarea {
   filter: blur(100px);
 }
 
-:matches(.slide-right-enter-done, .slide-right-enter.slide-right-enter-active, .slide-right-appear)
+.selection-route:matches(.router-enter-done, .router-enter.router-enter-active, .router-appear)
   ~ .background-video {
   transform: translateX(-141.5%) translateX(100px);
+}
+
+.selection-background {
+  background: var(--selectionBackground);
+  z-index: -1;
+  position: fixed;
+  left: 100px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%) translateX(-100px);
+  transition: transform 0.8s;
+}
+
+.product-route:matches(.router-enter-done, .router-enter.router-enter-active, .router-appear)
+  ~ .selection-background {
+  transform: translateX(100%);
+}
+.selection-route:matches(.router-enter-done, .router-enter.router-enter-active, .router-appear)
+  ~ .selection-background {
+  transform: translateX(0);
 }

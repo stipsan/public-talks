@@ -2,8 +2,8 @@ import "@babel/polyfill";
 
 import { unstable_createRoot } from "react-dom";
 import React, { lazy, Placeholder } from "react";
-import { Router, Link, Location } from "@reach/router";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Link } from "@reach/router";
+import TransitionRouter from "./components/TransitionRouter";
 
 const Header = props => <header {...props} />;
 
@@ -40,6 +40,7 @@ const Main = ({ children }) => (
         <source src="/assets/BO-BG-final.mp4" type="video/mp4" />
       </video>
     </div>
+    <div className="selection-background" />
     <Footer />
   </div>
 );
@@ -49,34 +50,14 @@ const Product = lazy(() => import("./pages/product"));
 
 const RootFallback = "Loading...";
 
-const FadeTransitionRouter = props => (
-  <Location>
-    {({ location }) => (
-      <TransitionGroup appear component={null}>
-        <CSSTransition
-          key={location.key}
-          classNames={`slide-${
-            location.pathname.endsWith("/selection") ? "right" : "left"
-          }`}
-          timeout={800}
-        >
-          <Router location={location} className="router">
-            {props.children}
-          </Router>
-        </CSSTransition>
-      </TransitionGroup>
-    )}
-  </Location>
-);
-
 unstable_createRoot(document.getElementById("root")).render(
-  <Main path="/">
+  <Main>
     <Placeholder delayMs={0} fallback={RootFallback}>
-      <FadeTransitionRouter>
+      <TransitionRouter>
         <Index default />
         <Checkout path="selection" />
         <Product path="product/:slug" />
-      </FadeTransitionRouter>
+      </TransitionRouter>
     </Placeholder>
   </Main>
 );

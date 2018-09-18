@@ -13,6 +13,8 @@ const browsers = Object.keys(support).reduce(
   []
 );
 
+const cacheBust = Date.now();
+
 const htmlHandler = (req, res) => {
   const supportsDynamicImport = matchesUA(req.headers["user-agent"], {
     browsers,
@@ -26,7 +28,7 @@ const htmlHandler = (req, res) => {
 <head>
   <meta charset=utf-8>
   <meta content="width=device-width" name=viewport>
-  <link rel="stylesheet" href="/client.css" type="text/css"/>
+  <link rel="stylesheet" href="/client.css?${cacheBust}" type="text/css"/>
 </head>
 <body>
   <div id="root"></div>
@@ -37,7 +39,9 @@ const htmlHandler = (req, res) => {
 };
 
 module.exports = async (req, res) => {
-  if (req.url.startsWith("/assets/")) {
+  const url = req.url.split("?")[0];
+
+  if (url.startsWith("/assets/")) {
     return serveHandler(req, res, {
       public: "assets",
       directoryListing: false,
@@ -45,7 +49,7 @@ module.exports = async (req, res) => {
     });
   }
 
-  if (req.url.endsWith(".js") || req.url.endsWith(".css")) {
+  if (url.endsWith(".js") || url.endsWith(".css")) {
     return serveHandler(req, res, {
       public: "public",
       directoryListing: false
