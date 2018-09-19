@@ -3,6 +3,7 @@ const { matchesUA } = require("browserslist-useragent");
 const caniuse = require("caniuse-api");
 const accepts = require("accepts");
 const { send } = require("micro");
+const pathToRegexp = require("path-to-regexp");
 
 const support = caniuse.getSupport("es6-module-dynamic-import");
 const browsers = Object.keys(support).reduce(
@@ -15,7 +16,7 @@ const browsers = Object.keys(support).reduce(
 
 const cacheBust = Date.now();
 
-const htmlHandler = (req, res) => {
+const htmlHandler = req => {
   const supportsDynamicImport = matchesUA(req.headers["user-agent"], {
     browsers,
     allowHigherVersions: true
@@ -38,6 +39,27 @@ const htmlHandler = (req, res) => {
   `;
 };
 
+const data = require("./data.json");
+const productDetailsRoute = pathToRegexp("/api/products/:slug");
+const jsonHandler = req => {
+  if (req.url === "/api/products") {
+    // Only send the essential data required to render the list
+    return data.map(
+      ({ slug, thumbnail, thumbnailHover, title, subtitle, placement }) => ({
+        slug,
+        thumbnail,
+        thumbnailHover,
+        title,
+        subtitle,
+        placement
+      })
+    );
+  }
+
+  const [, slug] = productDetailsRoute.exec(req.url);
+  return data.find(product => product.slug === slug);
+};
+
 module.exports = async (req, res) => {
   const url = req.url.split("?")[0];
 
@@ -49,7 +71,7 @@ module.exports = async (req, res) => {
     });
   }
 
-  if (url.endsWith(".js") || url.endsWith(".css")) {
+  if (url.endsWith(".js") || url.endsWith(".css") || url.endsWith(".map")) {
     return serveHandler(req, res, {
       public: "public",
       directoryListing: false
@@ -58,7 +80,7 @@ module.exports = async (req, res) => {
 
   switch (accepts(req).type(["json", "html"])) {
     case "json":
-      return { "@TODO": "implement API" };
+      return jsonHandler(req, res);
     case "html":
       return htmlHandler(req, res);
     default:

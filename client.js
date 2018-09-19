@@ -1,4 +1,5 @@
 import "@babel/polyfill";
+import "intersection-observer";
 
 import { unstable_createRoot } from "react-dom";
 import React, { lazy, Placeholder } from "react";

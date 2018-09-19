@@ -9,8 +9,17 @@ const plugins = [
   commonjs({
     include: /node_modules/,
     namedExports: {
-      [require.resolve("react")]: ["Component", "lazy", "Placeholder"],
-      [require.resolve("react-dom")]: ["unstable_createRoot"]
+      [require.resolve("react")]: [
+        "Component",
+        "lazy",
+        "Placeholder",
+        "cloneElement",
+        "createContext",
+        "createElement",
+        "PureComponent"
+      ],
+      [require.resolve("react-dom")]: ["unstable_createRoot"],
+      [require.resolve("react-is")]: ["isValidElementType"]
     }
   }),
   replace({
