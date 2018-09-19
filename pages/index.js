@@ -5,6 +5,17 @@ import { unstable_scheduleWork } from "schedule";
 
 import ProductsList from "../components/ProductsList";
 
+const Credits = styled.footer`
+  height: 110vh;
+  margin-left: 60px;
+  margin-right: 60px;
+  background-color: #3c444d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -430px;
+`;
+
 const Wrapper = styled.div`
   text-align: center;
 `;
@@ -52,6 +63,7 @@ export default class Index extends PureComponent {
           </div>
         </div>
         <ProductsList />
+        <Credits>Link to the original etc.</Credits>
       </Wrapper>
     );
   }

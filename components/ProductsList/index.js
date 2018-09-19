@@ -13,8 +13,6 @@ const MasonryColumns = styled.ul`
   column-fill: balance-all;
   position: relative;
   top: -300px;
-
-  margin-bottom: 100vh;
 `;
 
 const Title = styled.h2`
@@ -30,6 +28,17 @@ const Subtitle = styled.p`
   text-transform: uppercase;
   margin-top: -5px;
   margin-bottom: 7px;
+`;
+
+const HoverThumbnail = styled.div`
+  background-image: ${props =>
+    props.hoverImage ? `url(${JSON.stringify(props.hoverImage)})` : "none"};
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 `;
 
 const ProductWrapper = styled.li`
@@ -68,15 +77,19 @@ const ProductWrapper = styled.li`
     display: block;
     background: white;
     padding-bottom: 20px;
-    transition: opacity 100ms ease;
-
-    &:hover {
-      opacity: 0.01;
-    }
+    position: relative;
   }
 
   img {
     width: 100%;
+  }
+
+  ${HoverThumbnail} {
+    opacity: 0;
+  }
+
+  &:hover ${HoverThumbnail} {
+    opacity: 1;
   }
 
   p {
@@ -86,8 +99,9 @@ const ProductWrapper = styled.li`
     margin: 0;
   }
 `;
+
 const ParallaxProduct = props => {
-  const { title, subtitle, thumbnail, slug, placement } = props;
+  const { title, subtitle, thumbnail, thumbnailHover, slug, placement } = props;
   return (
     <ProductWrapper>
       <Link to={`/product/${slug}`}>
@@ -96,6 +110,7 @@ const ParallaxProduct = props => {
         {subtitle && <Subtitle>{subtitle}</Subtitle>}
         <p>Placement</p>
         <p>{placement}</p>
+        <HoverThumbnail hoverImage={thumbnailHover} />
       </Link>
     </ProductWrapper>
   );
