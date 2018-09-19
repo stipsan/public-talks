@@ -1,34 +1,91 @@
 [
   {
-    "title": "Beosound Edge",
-    "subtitle": "Available soon",
-    "slug": "beosound-edge",
-    "thumbnail2": "/assets/Beosound_Edge_01_800x800_Thumbnail.jpg",
-    "thumbnail": "/assets/Beosound_Edge_01_800x800_Thumbnail.jpg",
-    "background_image": "/assets/Beosound_Edge_Pink_2700x1560_Header.jpg",
+    "title": "BeoSound 2",
+    "subtitle": "With Google Voice Assistant",
+    "slug": "beosound-2",
+    "badge": "/assets/Google-logo-x2.png",
+    "thumbnail2": "/assets/BeoSound2.png",
+    "thumbnail": "/assets/beosound-2-natural.jpg",
+    "background_image": "/assets/beosound-2-gva-hero.jpg",
     "background_video": "",
-    "pricePerMonth": 108,
-    "priceTotal": 2900,
-    "image": "",
-    "placement": "Floor, Wall",
-    "content": "<h3>The Beosound Edge is a unique speaker and a minimalist design object, delivering a powerfully dynamic sound performance for the home. Designed for intuitive touch and motion this speaker is a divine and unbroken circle of audio clarity, precision and beauty.</h3>\n<p class=\"paragraph-large\">Controlling the Beosound Edge is every as mesmerising as its immersive sound performance. You\u00a0instinctively feel the urge to roll the balancing circle \u2013 and you should.\u00a0 This is a speaker that feels your presence. As you approach the speaker, the touch sensitive aluminium interface comes to life, lighting up thanks to proximity sensors. You can then start, stop or skip tracks with a simple tap on the surface. The Beosound Edge is calibrated to read the force of your touch, adjusting the volume as you roll the speaker back and forth, even when placed on the gravity-defying wall mount.</p>\n<h4></h4>\n<h4>DESIGNER</h4>\n<p>Michael Anastassiades</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>13 kg<br />\nW x H 50.3 x 50.2 cm, D 13 cm</p>\n",
+    "pricePerMonth": 62,
+    "priceTotal": 1650,
+    "image": "8",
+    "placement": "Tabletop or floor",
+    "content": "<h3>Introducing the powerful wireless speaker, Beosound 2 with the Google Assistant built in. A smart speaker with intelligent voice control crafted in solid aluminium and designed for stunning 360-degree sound experiences.</h3>\n<p>That\u2019s the sound of nearly a century of audio expertise. No matter how smart, we still believe the sound experience is the essential part of any speaker. With Beosound 2 we are setting new acoustic standards for the wireless speaker system.</p>\n<h4>DESIGNER</h4>\n<p>Torsten Valeur, David Lewis Designers</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>4.1 kg<br />\n19.6 x 43.1 cm W x H</p>\n",
+    "read_more_text": "View Product at bang-olufsen.com",
+    "read_more_link": "https://www.bang-olufsen.com/collection/wireless-speaker-systems/beosound-2",
     "variants": [
       {
-        "description": "",
-        "image": "/assets/Beosound_Edge_01_800x800_Thumbnail.jpg",
-        "image_hover": "/assets/Beosound_Edge_Pink_600x750_Image-Hover.jpg",
-        "pricePerMonth": 108,
-        "priceTotal": 2900
+        "description": "<p>Natural</p>\n",
+        "image": "/assets/beosound-2-natural.jpg",
+        "image_hover": "/assets/BS2_MO-1.jpg",
+        "pricePerMonth": 62,
+        "priceTotal": 1650
+      },
+      {
+        "description": "<p>Brass Tone</p>\n",
+        "thumbnail": "/assets/beosound-2-brass-tone.jpg",
+        "image": "/assets/beosound-2-brass-tone.jpg",
+        "image_hover": "/assets/BS2_MO-1.jpg",
+        "pricePerMonth": 62,
+        "priceTotal": 1650
       }
     ],
     "modules": [
       {
         "type": "full_width_image",
-        "image": "/assets/Beosound_Edge_Blue_1060x1336_Portrait.jpg"
+        "image": "/assets/BS2_Product.jpg"
       },
       {
         "type": "image_with_padding",
-        "image": "/assets/Beosound_Edge_detail_01_1060x1336_Portrait-1.jpg",
+        "image": "/assets/BS2_MO-1.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "title": "Beoplay M3",
+    "subtitle": "",
+    "slug": "beoplay-m3",
+    "badge": "",
+    "thumbnail2": "/assets/BeoPlayM3.png",
+    "thumbnail": "/assets/beoplay-m3-natural.jpg",
+    "background_image": "",
+    "background_video": "/assets/6_1.mp4",
+    "pricePerMonth": 10,
+    "priceTotal": 279,
+    "image": "",
+    "placement": "Bookshelf, table",
+    "content": "<h3>Exchangeable front covers let you match Beoplay M3 to your style. There are multiple options to match the simple silhouette of M3 to fit your interior style, with exchangeable covers in wool fabric or pearl blasted and anodized aluminium. The fabric covers are made by renowned Danish textile company Kvadrat.</h3>\n<h4>DESIGNER</h4>\n<p>Cecilie Manz</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>1.46 kg<br />\nW: 11.2, H: 15.1, D: 14 cm</p>\n<h4>PLACEMENT</h4>\n<p>Bookshelf, table</p>\n",
+    "read_more_text": "View Product at bang-olufsen.com",
+    "read_more_link": "https://www.beoplay.com/products/beoplaym3",
+    "variants": [
+      {
+        "description": "<p>Natural</p>\n",
+        "thumbnail": "/assets/beoplay-m3-natural.jpg",
+        "image": "/assets/beoplay-m3-natural.jpg",
+        "image_hover": "/assets/m3-dark.jpg",
+        "pricePerMonth": 10,
+        "priceTotal": 279
+      },
+      {
+        "description": "<p>Black</p>\n",
+        "thumbnail": "/assets/beoplay-m3-black.jpg",
+        "image": "/assets/beoplay-m3-black.jpg",
+        "image_hover": "/assets/m3-thumb.jpg",
+        "pricePerMonth": 10,
+        "priceTotal": 279
+      }
+    ],
+    "modules": [
+      {
+        "type": "full_width_image",
+        "image": "/assets/beoplay-m3-full-width-Image-1.jpg"
+      },
+      {
+        "type": "image_with_padding",
+        "image": "/assets/beoplay-m3-centered-Image-1.jpg",
         "caption": ""
       }
     ]
@@ -101,6 +158,40 @@
     ]
   },
   {
+    "title": "Beosound Edge",
+    "subtitle": "Available soon",
+    "slug": "beosound-edge",
+    "thumbnail2": "/assets/Beosound_Edge_01_800x800_Thumbnail.jpg",
+    "thumbnail": "/assets/Beosound_Edge_01_800x800_Thumbnail.jpg",
+    "background_image": "/assets/Beosound_Edge_Pink_2700x1560_Header.jpg",
+    "background_video": "",
+    "pricePerMonth": 108,
+    "priceTotal": 2900,
+    "image": "",
+    "placement": "Floor, Wall",
+    "content": "<h3>The Beosound Edge is a unique speaker and a minimalist design object, delivering a powerfully dynamic sound performance for the home. Designed for intuitive touch and motion this speaker is a divine and unbroken circle of audio clarity, precision and beauty.</h3>\n<p class=\"paragraph-large\">Controlling the Beosound Edge is every as mesmerising as its immersive sound performance. You\u00a0instinctively feel the urge to roll the balancing circle \u2013 and you should.\u00a0 This is a speaker that feels your presence. As you approach the speaker, the touch sensitive aluminium interface comes to life, lighting up thanks to proximity sensors. You can then start, stop or skip tracks with a simple tap on the surface. The Beosound Edge is calibrated to read the force of your touch, adjusting the volume as you roll the speaker back and forth, even when placed on the gravity-defying wall mount.</p>\n<h4></h4>\n<h4>DESIGNER</h4>\n<p>Michael Anastassiades</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>13 kg<br />\nW x H 50.3 x 50.2 cm, D 13 cm</p>\n",
+    "variants": [
+      {
+        "description": "",
+        "image": "/assets/Beosound_Edge_01_800x800_Thumbnail.jpg",
+        "image_hover": "/assets/Beosound_Edge_Pink_600x750_Image-Hover.jpg",
+        "pricePerMonth": 108,
+        "priceTotal": 2900
+      }
+    ],
+    "modules": [
+      {
+        "type": "full_width_image",
+        "image": "/assets/Beosound_Edge_Blue_1060x1336_Portrait.jpg"
+      },
+      {
+        "type": "image_with_padding",
+        "image": "/assets/Beosound_Edge_detail_01_1060x1336_Portrait-1.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
     "title": "BeoSound 35",
     "subtitle": "",
     "slug": "beosound-35",
@@ -147,6 +238,51 @@
       {
         "type": "image_with_padding",
         "image": "/assets/beosound-35-centered-image_01.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
+    "title": "BeoSound 1",
+    "subtitle": "With Google Voice Assistant",
+    "slug": "beosound-1",
+    "badge": "/assets/Google-logo-x2.png",
+    "thumbnail2": "/assets/BeoSound1-1.png",
+    "thumbnail": "/assets/beosound-1-natural.jpg",
+    "background_image": "/assets/beosound-1-gva-hero.jpg",
+    "background_video": "",
+    "pricePerMonth": 47,
+    "priceTotal": 1250,
+    "image": "",
+    "placement": "Table",
+    "content": "<h3>Introducing the portable wireless speaker, BeoSound 1 with the Google Assistant built in. A smart speaker with intelligent voice control crafted in solid aluminium and designed for stunning 360-degree sound experiences.</h3>\n<p>Designed in carefully crafted aluminium, BeoSound 1 doesn\u2019t look like any other wireless home speaker. The compact conical design and smooth reflective surfaces adapt seamlessly to your interiors making any place its perfect place.</p>\n<h4>DESIGNER</h4>\n<p>Torsten Valeur, David Lewis Designers</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>3.5 kg<br />\n16.2 x 32.7 cm W x H</p>\n<h4>PLACEMENT</h4>\n<p>Table</p>\n",
+    "read_more_text": "View Product at bang-olufsen.com",
+    "read_more_link": "https://www.bang-olufsen.com/collection/wireless-speaker-systems/beosound-1",
+    "variants": [
+      {
+        "description": "<p>Natural</p>\n",
+        "image": "/assets/beosound-1-natural.jpg",
+        "image_hover": "/assets/BS1_MO.jpg",
+        "pricePerMonth": 47,
+        "priceTotal": 1250
+      },
+      {
+        "description": "<p>Brass Tone</p>\n",
+        "thumbnail": "/assets/beosound-1-brass-tone.jpg",
+        "image": "/assets/beosound-1-brass-tone.jpg",
+        "image_hover": "/assets/BS1_MO.jpg",
+        "pricePerMonth": 47,
+        "priceTotal": 1250
+      }
+    ],
+    "modules": [
+      {
+        "type": "full_width_image",
+        "image": "/assets/beosound-1-full-width-image_01.jpg"
+      },
+      {
+        "type": "image_with_padding",
+        "image": "/assets/BS1_Product.jpg",
         "caption": ""
       }
     ]
@@ -204,142 +340,7 @@
       }
     ]
   },
-  {
-    "title": "Beoplay M3",
-    "subtitle": "",
-    "slug": "beoplay-m3",
-    "badge": "",
-    "thumbnail2": "/assets/BeoPlayM3.png",
-    "thumbnail": "/assets/beoplay-m3-natural.jpg",
-    "background_image": "",
-    "background_video": "/assets/6_1.mp4",
-    "pricePerMonth": 10,
-    "priceTotal": 279,
-    "image": "",
-    "placement": "Bookshelf, table",
-    "content": "<h3>Exchangeable front covers let you match Beoplay M3 to your style. There are multiple options to match the simple silhouette of M3 to fit your interior style, with exchangeable covers in wool fabric or pearl blasted and anodized aluminium. The fabric covers are made by renowned Danish textile company Kvadrat.</h3>\n<h4>DESIGNER</h4>\n<p>Cecilie Manz</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>1.46 kg<br />\nW: 11.2, H: 15.1, D: 14 cm</p>\n<h4>PLACEMENT</h4>\n<p>Bookshelf, table</p>\n",
-    "read_more_text": "View Product at bang-olufsen.com",
-    "read_more_link": "https://www.beoplay.com/products/beoplaym3",
-    "variants": [
-      {
-        "description": "<p>Natural</p>\n",
-        "thumbnail": "/assets/beoplay-m3-natural.jpg",
-        "image": "/assets/beoplay-m3-natural.jpg",
-        "image_hover": "/assets/m3-dark.jpg",
-        "pricePerMonth": 10,
-        "priceTotal": 279
-      },
-      {
-        "description": "<p>Black</p>\n",
-        "thumbnail": "/assets/beoplay-m3-black.jpg",
-        "image": "/assets/beoplay-m3-black.jpg",
-        "image_hover": "/assets/m3-thumb.jpg",
-        "pricePerMonth": 10,
-        "priceTotal": 279
-      }
-    ],
-    "modules": [
-      {
-        "type": "full_width_image",
-        "image": "/assets/beoplay-m3-full-width-Image-1.jpg"
-      },
-      {
-        "type": "image_with_padding",
-        "image": "/assets/beoplay-m3-centered-Image-1.jpg",
-        "caption": ""
-      }
-    ]
-  },
-  {
-    "title": "BeoSound 1",
-    "subtitle": "With Google Voice Assistant",
-    "slug": "beosound-1",
-    "badge": "/assets/Google-logo-x2.png",
-    "thumbnail2": "/assets/BeoSound1-1.png",
-    "thumbnail": "/assets/beosound-1-natural.jpg",
-    "background_image": "/assets/beosound-1-gva-hero.jpg",
-    "background_video": "",
-    "pricePerMonth": 47,
-    "priceTotal": 1250,
-    "image": "",
-    "placement": "Table",
-    "content": "<h3>Introducing the portable wireless speaker, BeoSound 1 with the Google Assistant built in. A smart speaker with intelligent voice control crafted in solid aluminium and designed for stunning 360-degree sound experiences.</h3>\n<p>Designed in carefully crafted aluminium, BeoSound 1 doesn\u2019t look like any other wireless home speaker. The compact conical design and smooth reflective surfaces adapt seamlessly to your interiors making any place its perfect place.</p>\n<h4>DESIGNER</h4>\n<p>Torsten Valeur, David Lewis Designers</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>3.5 kg<br />\n16.2 x 32.7 cm W x H</p>\n<h4>PLACEMENT</h4>\n<p>Table</p>\n",
-    "read_more_text": "View Product at bang-olufsen.com",
-    "read_more_link": "https://www.bang-olufsen.com/collection/wireless-speaker-systems/beosound-1",
-    "variants": [
-      {
-        "description": "<p>Natural</p>\n",
-        "image": "/assets/beosound-1-natural.jpg",
-        "image_hover": "/assets/BS1_MO.jpg",
-        "pricePerMonth": 47,
-        "priceTotal": 1250
-      },
-      {
-        "description": "<p>Brass Tone</p>\n",
-        "thumbnail": "/assets/beosound-1-brass-tone.jpg",
-        "image": "/assets/beosound-1-brass-tone.jpg",
-        "image_hover": "/assets/BS1_MO.jpg",
-        "pricePerMonth": 47,
-        "priceTotal": 1250
-      }
-    ],
-    "modules": [
-      {
-        "type": "full_width_image",
-        "image": "/assets/beosound-1-full-width-image_01.jpg"
-      },
-      {
-        "type": "image_with_padding",
-        "image": "/assets/BS1_Product.jpg",
-        "caption": ""
-      }
-    ]
-  },
-  {
-    "title": "BeoSound 2",
-    "subtitle": "With Google Voice Assistant",
-    "slug": "beosound-2",
-    "badge": "/assets/Google-logo-x2.png",
-    "thumbnail2": "/assets/BeoSound2.png",
-    "thumbnail": "/assets/beosound-2-natural.jpg",
-    "background_image": "/assets/beosound-2-gva-hero.jpg",
-    "background_video": "",
-    "pricePerMonth": 62,
-    "priceTotal": 1650,
-    "image": "8",
-    "placement": "Tabletop or floor",
-    "content": "<h3>Introducing the powerful wireless speaker, Beosound 2 with the Google Assistant built in. A smart speaker with intelligent voice control crafted in solid aluminium and designed for stunning 360-degree sound experiences.</h3>\n<p>That\u2019s the sound of nearly a century of audio expertise. No matter how smart, we still believe the sound experience is the essential part of any speaker. With Beosound 2 we are setting new acoustic standards for the wireless speaker system.</p>\n<h4>DESIGNER</h4>\n<p>Torsten Valeur, David Lewis Designers</p>\n<h4>WEIGHT &amp; DIMENSIONS</h4>\n<p>4.1 kg<br />\n19.6 x 43.1 cm W x H</p>\n",
-    "read_more_text": "View Product at bang-olufsen.com",
-    "read_more_link": "https://www.bang-olufsen.com/collection/wireless-speaker-systems/beosound-2",
-    "variants": [
-      {
-        "description": "<p>Natural</p>\n",
-        "image": "/assets/beosound-2-natural.jpg",
-        "image_hover": "/assets/BS2_MO-1.jpg",
-        "pricePerMonth": 62,
-        "priceTotal": 1650
-      },
-      {
-        "description": "<p>Brass Tone</p>\n",
-        "thumbnail": "/assets/beosound-2-brass-tone.jpg",
-        "image": "/assets/beosound-2-brass-tone.jpg",
-        "image_hover": "/assets/BS2_MO-1.jpg",
-        "pricePerMonth": 62,
-        "priceTotal": 1650
-      }
-    ],
-    "modules": [
-      {
-        "type": "full_width_image",
-        "image": "/assets/BS2_Product.jpg"
-      },
-      {
-        "type": "image_with_padding",
-        "image": "/assets/BS2_MO-1.jpg",
-        "caption": ""
-      }
-    ]
-  },
+
   {
     "title": "BeoSound Shape",
     "subtitle": "",

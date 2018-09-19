@@ -1,6 +1,7 @@
 // list over stuff
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import styled from "styled-components";
+import { unstable_scheduleWork } from "schedule";
 
 import ProductsList from "../components/ProductsList";
 
@@ -8,35 +9,26 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 let restoreScrollTop = 0;
-export default class Index extends Component {
+export default class Index extends PureComponent {
   state = { scrollTop: 0 };
 
   scrollerRef = React.createRef();
 
   componentDidMount() {
     this.scrollerRef.current.scrollTop = restoreScrollTop;
-
-    this.scrollerRef.current.addEventListener("scroll", this.handleScroll);
   }
 
-  handleScroll = event => this.setState({ scrollTop: event.target.scrollTop });
+  handleScroll = event => {
+    const { scrollTop } = event.target;
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("scrollTop", this.state.scrollTop, prevState.scrollTop);
-
-    if (this.state.scrollTop === prevState.scrollTop) {
-      console.error("unnecessary update!");
-    }
-
-    // Update the css variable that children parallax components use to offset according to perspective
-    // @TODO compare performance with style prop in react, instead of doing this onUpdate
-    //this.scrollerRef.current.style.setProperty('--scroll-top', `${this.state.scrollTop}px`)
-  }
+    unstable_scheduleWork(() => {
+      //requestAnimationFrame(() => {
+      this.setState({ scrollTop });
+    });
+  };
 
   componentWillUnmount() {
-    restoreScrollTop = this.scrollerRef.current.scrollTop;
-
-    this.scrollerRef.current.removeEventListener("scroll", this.handleScroll);
+    restoreScrollTop = this.state.scrollTop;
   }
 
   render() {
@@ -44,6 +36,7 @@ export default class Index extends Component {
       <Wrapper
         className="main-scroller"
         ref={this.scrollerRef}
+        onScroll={this.handleScroll}
         style={{ "--scroll-top": `${this.state.scrollTop}px` }}
       >
         <div className="hero">

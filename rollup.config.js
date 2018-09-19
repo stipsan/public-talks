@@ -19,7 +19,8 @@ const plugins = [
         "PureComponent"
       ],
       [require.resolve("react-dom")]: ["unstable_createRoot"],
-      [require.resolve("react-is")]: ["isValidElementType"]
+      [require.resolve("react-is")]: ["isValidElementType"],
+      [require.resolve("schedule")]: ["unstable_scheduleWork"]
     }
   }),
   replace({
