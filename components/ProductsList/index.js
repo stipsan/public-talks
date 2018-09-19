@@ -11,17 +11,10 @@ const MasonryColumns = styled.ul`
   column-count: 4;
   column-gap: 20px;
   column-fill: balance-all;
+  position: relative;
+  top: -300px;
 
-  /*
-	 * Use the same CSS variable as specified in our instance.
-	 */
-  opacity: var(--opacity);
-  /*
-	 * The will-change CSS property provides a way for authors to hint browsers about the kind of changes
-	 * to be expected on an element, so that the browser can setup appropriate optimizations ahead of time
-	 * before the element is actually changed.
-	 */
-  will-change: opacity;
+  margin-bottom: 100vh;
 `;
 
 const Title = styled.h2`
@@ -43,13 +36,43 @@ const ProductWrapper = styled.li`
   break-inside: avoid;
   color: black;
   margin: 0;
-  padding: 10px;
-  padding-bottom: 30px;
+  padding: 0;
+  padding-bottom: 20px;
+
+  transition: transform 16ms ease-out;
+  perspective: 1000;
+  backface-visibility: hidden;
+
+  &:nth-child(1),
+  &:nth-child(2) {
+    transform: translate3d(0, 86px, 0);
+    transform: translate3d(0, calc((var(--scroll-top) * -0.1) + 86px), 0);
+  }
+  &:nth-child(3),
+  &:nth-child(4) {
+    transform: translate3d(0, 161px, 0);
+    transform: translate3d(0, calc((var(--scroll-top) * -0.3) + 161px), 0);
+  }
+  &:nth-child(5),
+  &:nth-child(6) {
+    transform: translate3d(0, 300px, 0);
+    transform: translate3d(0, calc((var(--scroll-top) * -0.3) + 300px), 0);
+  }
+  &:nth-child(7),
+  &:nth-child(8) {
+    transform: translate3d(0, 241px, 0);
+    transform: translate3d(0, calc((var(--scroll-top) * -0.1) + 241px), 0);
+  }
 
   > a {
     display: block;
     background: white;
     padding-bottom: 20px;
+    transition: opacity 100ms ease;
+
+    &:hover {
+      opacity: 0.01;
+    }
   }
 
   img {
