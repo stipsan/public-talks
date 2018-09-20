@@ -92,6 +92,19 @@ const ProductWrapper = styled.li`
     opacity: 1;
   }
 
+  /* @TODO cheap trick to target chrome, refactor away from columns to fix box shadow issues in safari */
+  @supports (contain: strict) {
+    ${HoverThumbnail} {
+      box-shadow: none;
+      will-change: box-shadow;
+      transition: box-shadow 0.5s;
+    }
+
+    &:hover ${HoverThumbnail} {
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
+    }
+  }
+
   p {
     font-size: 11px;
     line-height: 18px;
