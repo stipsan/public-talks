@@ -48,7 +48,7 @@ const ProductWrapper = styled.li`
   padding: 0;
   padding-bottom: 20px;
 
-  transition: transform 16ms ease-out;
+  will-change: transform;
   perspective: 1000;
   backface-visibility: hidden;
 
