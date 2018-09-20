@@ -63,7 +63,16 @@ export default class Index extends PureComponent {
           </div>
         </div>
         <ProductsList />
-        <Credits>Link to the original etc.</Credits>
+        <Credits>
+          Link to the{" "}
+          <a
+            target="_blank"
+            href="https://www.bang-olufsen.com/en/collection/wireless-speaker-systems"
+          >
+            original
+          </a>{" "}
+          etc.
+        </Credits>
       </Wrapper>
     );
   }
