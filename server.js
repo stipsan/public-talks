@@ -48,8 +48,8 @@ const jsonHandler = req => {
     return data.map(
       ({ slug, thumbnail, thumbnailHover, title, subtitle, placement }) => ({
         slug,
-        thumbnail: `${thumbnail}?${cacheBust}`,
-        thumbnailHover: `${thumbnailHover}?${cacheBust}`,
+        thumbnail,
+        thumbnailHover,
         title,
         subtitle,
         placement
@@ -58,13 +58,7 @@ const jsonHandler = req => {
   }
 
   const [, slug] = productDetailsRoute.exec(req.url);
-  const product = data.find(product => product.slug === slug);
-
-  product.thumbnail = `${product.thumbnail}?${cacheBust}`;
-  product.thumbnailHover = `${product.thumbnailHover}?${cacheBust}`;
-  product.heroImage = `${product.heroImage}?${cacheBust}`;
-
-  return product;
+  return data.find(product => product.slug === slug);
 };
 
 module.exports = async (req, res) => {

@@ -8,7 +8,7 @@ import TransitionRouter from "./components/TransitionRouter";
 const Footer = props => <footer {...props} />;
 
 // @TODO remove this
-const ENABLE_AUTOPLAY = false;
+const ENABLE_AUTOPLAY = true;
 
 const Main = ({ children }) => (
   <>
