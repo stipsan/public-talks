@@ -30,6 +30,9 @@ const SuperVideo = styled.video`
   min-height: 100%;
   transform: translate(-50%, -50%);
 `;
+const FooterImage = styled.img`
+  width: 100%;
+`;
 
 let cache = {};
 export default class ProductDetails extends Component {
@@ -44,8 +47,13 @@ export default class ProductDetails extends Component {
   }
 
   render() {
-    const { heroImage, heroVideo } = this.state.product;
-    console.log(heroVideo);
+    const {
+      heroImage,
+      heroVideo,
+      footerImage,
+      largeThumbnail
+    } = this.state.product;
+
     return (
       <>
         <Hero>
@@ -65,6 +73,8 @@ export default class ProductDetails extends Component {
             <SuperImage imgUrl={heroImage} />
           )}
         </Hero>
+        <img src={largeThumbnail} />
+        <FooterImage src={footerImage} />
       </>
     );
   }
