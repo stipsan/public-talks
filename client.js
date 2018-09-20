@@ -33,19 +33,36 @@ const Main = ({ children }) => (
     <Footer />
   </>
 );
+
+// Wrap each of these in custom placeholder components to maximize UX
 const Index = lazy(() => import("./pages/index"));
 const Checkout = lazy(() => import("./pages/checkout"));
 const Product = lazy(() => import("./pages/product"));
 
-const RootFallback = "Loading...";
+// It works!!
+const ProductPlaceholder = (
+  <>
+    <div className="product-background">Loading...</div>
+  </>
+);
+const ProductRoute = props => (
+  <Placeholder delayMs={300} fallback={ProductPlaceholder}>
+    <Product {...props} />
+  </Placeholder>
+);
+
+// @TODO temporary, root placeholder will not be needed since each router will have its own
+const RootFallback = "Loading root...";
+
+// @TODO make nav placeholder that can "cancel" loading? Or retry?
 
 unstable_createRoot(document.getElementById("root")).render(
   <Main>
-    <Placeholder delayMs={0} fallback={RootFallback}>
+    <Placeholder delayMs={300} fallback={RootFallback}>
       <TransitionRouter>
         <Index default />
         <Checkout path="selection" />
-        <Product path="product/:slug" />
+        <ProductRoute path="product/:slug" />
       </TransitionRouter>
     </Placeholder>
   </Main>

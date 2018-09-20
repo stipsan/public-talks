@@ -32,7 +32,7 @@ const Subtitle = styled.p`
 
 const HoverThumbnail = styled.div`
   background-image: ${props =>
-    props.hoverImage ? `url(${JSON.stringify(props.hoverImage)})` : "none"};
+    props.imgUrl ? `url(${JSON.stringify(props.imgUrl)})` : "none"};
   background-size: cover;
   position: absolute;
   top: 0;
@@ -110,7 +110,7 @@ const ParallaxProduct = props => {
         {subtitle && <Subtitle>{subtitle}</Subtitle>}
         <p>Placement</p>
         <p>{placement}</p>
-        <HoverThumbnail hoverImage={thumbnailHover} />
+        <HoverThumbnail imgUrl={thumbnailHover} />
       </Link>
     </ProductWrapper>
   );

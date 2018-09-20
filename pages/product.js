@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
+import ProductDetails from "../components/ProductDetails";
+
 const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
   position: fixed;
   top: 0;
@@ -50,12 +52,15 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
 
 export default class Product extends Component {
   render() {
+    const { slug } = this.props;
+
     return (
       <>
         <BackLink>
           <span>Back to home</span>
         </BackLink>
         <div className="product-background">
+          <ProductDetails slug={slug} />
           <ul>
             <li>
               <Link to="/">Home</Link>

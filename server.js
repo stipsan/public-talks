@@ -14,6 +14,7 @@ const browsers = Object.keys(support).reduce(
   []
 );
 
+const sleep = duration => new Promise(resolve => setTimeout(resolve, duration));
 const cacheBust = Date.now();
 
 const htmlHandler = req => {
@@ -22,8 +23,8 @@ const htmlHandler = req => {
     allowHigherVersions: true
   });
   const script = supportsDynamicImport
-    ? '<script async type="module" src="/esm/client.js"></script>'
-    : '<script src="https://unpkg.com/systemjs/dist/system-production.js"></script><script>SystemJS.import("/es5/client.js");</script>';
+    ? `<script async type="module" src="/esm/client.js?${cacheBust}"></script>`
+    : `<script src="https://unpkg.com/systemjs/dist/system-production.js"></script><script>SystemJS.import("/es5/client.js?${cacheBust}");</script>`;
   return `<!doctype html>
 <html>
 <head>
@@ -47,8 +48,8 @@ const jsonHandler = req => {
     return data.map(
       ({ slug, thumbnail, thumbnailHover, title, subtitle, placement }) => ({
         slug,
-        thumbnail,
-        thumbnailHover,
+        thumbnail: `${thumbnail}?${cacheBust}`,
+        thumbnailHover: `${thumbnailHover}?${cacheBust}`,
         title,
         subtitle,
         placement
@@ -57,11 +58,19 @@ const jsonHandler = req => {
   }
 
   const [, slug] = productDetailsRoute.exec(req.url);
-  return data.find(product => product.slug === slug);
+  const product = data.find(product => product.slug === slug);
+
+  product.thumbnail = `${product.thumbnail}?${cacheBust}`;
+  product.thumbnailHover = `${product.thumbnailHover}?${cacheBust}`;
+  product.heroImage = `${product.heroImage}?${cacheBust}`;
+
+  return product;
 };
 
 module.exports = async (req, res) => {
   const url = req.url.split("?")[0];
+
+  //await sleep(1000)
 
   if (url.startsWith("/assets/")) {
     return serveHandler(req, res, {
@@ -72,6 +81,7 @@ module.exports = async (req, res) => {
   }
 
   if (url.endsWith(".js") || url.endsWith(".css") || url.endsWith(".map")) {
+    //await sleep(3000)
     return serveHandler(req, res, {
       public: "public",
       directoryListing: false
