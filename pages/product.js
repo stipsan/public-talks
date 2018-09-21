@@ -51,9 +51,30 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
 `;
 
 export default class Product extends Component {
+  componentDidUpdate() {
+    try {
+      console.warn(
+        "update",
+        console.log(
+          document.querySelector(".product-background").parentNode.className
+        )
+      );
+    } catch {
+      // nah
+    }
+  }
   render() {
     const { slug } = this.props;
-
+    try {
+      console.warn(
+        "render",
+        console.log(
+          document.querySelector(".product-background").parentNode.className
+        )
+      );
+    } catch {
+      // nah
+    }
     return (
       <>
         <BackLink>

@@ -126,9 +126,10 @@ textarea {
   right: 0px;
   bottom: 0px;
   left: 0px;
-  overflow: auto;
+  overflow: hidden;
   transition: all 0.8s;
   transform: translateX(0%);
+  width: 100vw;
 }
 .router-enter {
   transform: translateX(-100%);
@@ -149,8 +150,14 @@ textarea {
 .router-exit {
   transform: translateX(0);
 }
+.product-route.router-exit {
+  transform: translateX(0%) !important;
+}
+.product-route.router-exit.router-exit-active {
+  transform: translateX(-100%) !important;
+}
 
-:first-of-type:not(:last-of-type):matches(.product-route, .index-route) {
+:first-of-type:not(:last-of-type):matches(.product-route, .index-route):not(.router-exit) {
   transform: translateX(-100%);
 }
 :first-of-type:not(:last-of-type):matches(.selection-route) {

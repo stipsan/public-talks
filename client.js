@@ -40,11 +40,12 @@ const Checkout = lazy(() => import("./pages/checkout"));
 const Product = lazy(() => import("./pages/product"));
 
 // It works!!
-const ProductPlaceholder = (
-  <>
-    <div className="product-background">Loading...</div>
-  </>
+const IndexRoute = props => (
+  <Placeholder delayMs={300} fallback={"Loading index..."}>
+    <Index {...props} />
+  </Placeholder>
 );
+const ProductPlaceholder = <div className="product-background">Loading...</div>;
 const ProductRoute = props => (
   <Placeholder delayMs={300} fallback={ProductPlaceholder}>
     <Product {...props} />
@@ -63,12 +64,10 @@ const RootFallback = "Loading root...";
 
 unstable_createRoot(document.getElementById("root")).render(
   <Main>
-    <Placeholder delayMs={300} fallback={RootFallback}>
-      <TransitionRouter>
-        <Index default />
-        <CheckoutRoute path="selection" />
-        <ProductRoute path="product/:slug" />
-      </TransitionRouter>
-    </Placeholder>
+    <TransitionRouter>
+      <IndexRoute default />
+      <CheckoutRoute path="selection" />
+      <ProductRoute path="product/:slug" />
+    </TransitionRouter>
   </Main>
 );

@@ -1,7 +1,29 @@
 // list over stuff
-import React, { Component } from "react";
+import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { cache } from "../../api/cache";
+import { createResource } from "simple-cache-provider";
+
+const thumbnailsResource = createResource(
+  src =>
+    new Promise((resolve, reject) => {
+      console.log("oh oh oho hhh", src);
+      const image = new Image();
+
+      image.onerror = reject;
+      image.addEventListener("load", () => resolve(src));
+      image.addEventListener("error", () => {
+        console.error("error now", src);
+      });
+      /*
+      image.addEventListener('load', () => {
+        requestAnimationFrame(() => resolve(src))
+      })
+      //*/
+      image.src = src;
+    })
+);
 
 const MasonryColumns = styled.ul`
   list-style: none;
@@ -13,6 +35,27 @@ const MasonryColumns = styled.ul`
   column-fill: balance-all;
   position: relative;
   top: -300px;
+`;
+
+const Button = styled(Link)`
+  border: 1px solid white;
+  color: white;
+  font-size: 13px;
+  width: 100%;
+  height: 42px;
+  line-height: 32px;
+  border-radius: 0;
+  display: block;
+  margin: 0 auto;
+  font-weight: 500;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  padding: 6px 12px;
 `;
 
 const Title = styled.h2`
@@ -113,12 +156,50 @@ const ProductWrapper = styled.li`
   }
 `;
 
+const placeHolderShimmer = keyframes`
+  0%{
+        background-position: 200% 0;
+    }
+    100%{
+        background-position: -200% 0;
+    }
+`;
+
+const AnimatedSvg = styled.svg`
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: ${placeHolderShimmer};
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 400% 100%;
+`;
+
+const ImagePlaceholder = (
+  <AnimatedSvg width="100%" height="100%" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="transparent" />
+  </AnimatedSvg>
+);
+
+const SvgFiller = () => (
+  <svg width="100%" height="100%" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="transparent" />
+  </svg>
+);
+
+const ThumbnailImage = props => (
+  <img src={thumbnailsResource.read(cache, props.thumbnail)} />
+);
+
 const ParallaxProduct = props => {
   const { title, subtitle, thumbnail, thumbnailHover, slug, placement } = props;
   return (
     <ProductWrapper>
       <Link to={`/product/${slug}`}>
-        <img src={thumbnail} />
+        <Placeholder delayMs={1000} fallback={ImagePlaceholder}>
+          <ThumbnailImage thumbnail={thumbnail} />
+        </Placeholder>
         <Title>{title}</Title>
         {subtitle && <Subtitle>{subtitle}</Subtitle>}
         <p>Placement</p>
@@ -129,14 +210,14 @@ const ParallaxProduct = props => {
   );
 };
 
-let cache = [];
+let caches = [];
 export default class ProductsList extends Component {
-  state = { products: cache };
+  state = { products: caches };
 
   async componentDidMount() {
     const res = await fetch("/api/products");
     this.setState({ products: await res.json() }, () => {
-      cache = this.state.products;
+      caches = this.state.products;
     });
   }
 

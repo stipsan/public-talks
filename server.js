@@ -64,7 +64,7 @@ const jsonHandler = req => {
 module.exports = async (req, res) => {
   const url = req.url.split("?")[0];
 
-  //await sleep(1000)
+  await sleep(Math.floor(Math.random() * 1000));
 
   if (url.startsWith("/assets/")) {
     return serveHandler(req, res, {

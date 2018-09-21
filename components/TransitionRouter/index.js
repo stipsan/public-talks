@@ -7,7 +7,12 @@ const TransitionRouter = props => (
   <Location>
     {({ location }) => (
       <TransitionGroup appear component={null}>
-        <CSSTransition key={location.key} classNames="router" timeout={800}>
+        <CSSTransition
+          key={location.key}
+          classNames="router"
+          timeout={80000}
+          mountOnEnter
+        >
           <Router
             location={location}
             component="section"

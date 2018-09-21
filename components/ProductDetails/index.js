@@ -105,16 +105,13 @@ const FooterImage = styled.img`
   width: 100%;
 `;
 
-let cache = {};
 export default class ProductDetails extends Component {
-  state = { product: cache };
+  state = { product: {} };
 
   async componentDidMount() {
     const { slug } = this.props;
     const res = await fetch(`/api/products/${slug}`);
-    this.setState({ product: await res.json() }, () => {
-      cache = this.state.product;
-    });
+    this.setState({ product: await res.json() });
   }
 
   render() {
