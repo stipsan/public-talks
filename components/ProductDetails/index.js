@@ -10,6 +10,75 @@ const Hero = styled.header`
   padding-top: 56.4%;
 `;
 
+const AddToSelection = styled(Link)`
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e1e1e;
+  height: 42px;
+  line-height: 42px;
+  border: 1px solid #505050;
+  padding: 0 30px;
+  transition: all 0.3s;
+
+  &:after {
+    content: " +";
+  }
+
+  &:hover {
+    background: #505050;
+    color: white;
+  }
+`;
+
+const Content = styled.article`
+  display: flex;
+  margin-top: 100px;
+  padding-left: 60px;
+  padding-right: 60px;
+  align-items: flex-start;
+
+  > * {
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 50%;
+  }
+`;
+
+const LargeThumbnail = styled.img``;
+
+const Details = styled.div`
+  color: #4a4a4a;
+
+  p {
+    margin: 8px 0 50px;
+    color: #505050;
+    font-weight: 400;
+  }
+
+  h3,
+  h4 {
+    color: #4a4a4a;
+  }
+
+  h3 {
+    margin: 0 0 50px;
+    font-size: 18px;
+  }
+
+  h4 {
+    line-height: 1;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  h4 + p {
+    margin-bottom: 30px;
+  }
+`;
+
 const SuperImage = styled.div`
   background-image: ${props =>
     props.imgUrl ? `url(${JSON.stringify(props.imgUrl)})` : "none"};
@@ -31,6 +100,8 @@ const SuperVideo = styled.video`
   transform: translate(-50%, -50%);
 `;
 const FooterImage = styled.img`
+  margin-top: 100px;
+  margin-bottom: -7px;
   width: 100%;
 `;
 
@@ -51,7 +122,8 @@ export default class ProductDetails extends Component {
       heroImage,
       heroVideo,
       footerImage,
-      largeThumbnail
+      largeThumbnail,
+      content
     } = this.state.product;
 
     return (
@@ -73,7 +145,13 @@ export default class ProductDetails extends Component {
             <SuperImage imgUrl={heroImage} />
           )}
         </Hero>
-        <img src={largeThumbnail} />
+        <Content>
+          <LargeThumbnail src={largeThumbnail} />
+          <Details>
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+            <AddToSelection to="/selection">Add to selection</AddToSelection>
+          </Details>
+        </Content>
         <FooterImage src={footerImage} />
       </>
     );

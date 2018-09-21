@@ -111,15 +111,6 @@ textarea {
   transform: translateX(0);
 }
 
-@keyframes test {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-}
-
 .main-scroller {
   position: absolute;
   top: 0px;
@@ -142,12 +133,19 @@ textarea {
 .router-enter {
   transform: translateX(-100%);
 }
+.selection-route.router-enter {
+  transform: translateX(100%);
+}
 .router-enter.router-enter-active {
   transform: translateX(0) !important;
 }
 .router-exit.router-exit-active {
   transform: translateX(-100%);
 }
+.selection-route.router-exit.router-exit-active {
+  transform: translateX(100%);
+}
+
 .router-exit {
   transform: translateX(0);
 }
@@ -155,10 +153,15 @@ textarea {
 :first-of-type:not(:last-of-type):matches(.product-route, .index-route) {
   transform: translateX(-100%);
 }
+:first-of-type:not(:last-of-type):matches(.selection-route) {
+  transform: translateX(100%);
+}
 .product-route.router-enter-done,
 .product-route.router-enter-active,
 .index-route.router-enter-done,
-.index-route.router-enter-active {
+.index-route.router-enter-active,
+.selection-route.router-enter-done,
+.selection-route.router-enter-active {
   transform: translateX(0);
 }
 

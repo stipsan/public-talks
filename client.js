@@ -50,6 +50,11 @@ const ProductRoute = props => (
     <Product {...props} />
   </Placeholder>
 );
+const CheckoutRoute = props => (
+  <Placeholder delayMs={300} fallback={"Loading selection..."}>
+    <Checkout {...props} />
+  </Placeholder>
+);
 
 // @TODO temporary, root placeholder will not be needed since each router will have its own
 const RootFallback = "Loading root...";
@@ -61,7 +66,7 @@ unstable_createRoot(document.getElementById("root")).render(
     <Placeholder delayMs={300} fallback={RootFallback}>
       <TransitionRouter>
         <Index default />
-        <Checkout path="selection" />
+        <CheckoutRoute path="selection" />
         <ProductRoute path="product/:slug" />
       </TransitionRouter>
     </Placeholder>

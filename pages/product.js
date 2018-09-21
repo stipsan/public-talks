@@ -61,14 +61,6 @@ export default class Product extends Component {
         </BackLink>
         <div className="product-background">
           <ProductDetails slug={slug} />
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/selection">Checkout</Link>
-            </li>
-          </ul>
         </div>
       </>
     );
