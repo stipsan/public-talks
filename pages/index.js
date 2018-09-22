@@ -1,7 +1,8 @@
 // list over stuff
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import styled from "styled-components";
-import { unstable_scheduleWork } from "scheduler";
+import rafSchd from "raf-schd";
 
 import ProductsList from "../components/ProductsList";
 
@@ -20,36 +21,37 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 let restoreScrollTop = 0;
-export default class Index extends PureComponent {
-  state = { scrollTop: 0 };
 
-  scrollerRef = React.createRef();
-
+export default class Index extends Component {
   componentDidMount() {
-    this.scrollerRef.current.scrollTop = restoreScrollTop;
+    const scroller = ReactDOM.findDOMNode(this).closest(".router");
+
+    scroller.scrollTop = restoreScrollTop;
+
+    const schedule = rafSchd(({ target: { scrollTop } }) => {
+      document.body.style.setProperty("--scroll-top", `${scrollTop}px`);
+      if (scrollTop > 0) {
+        document.body.style.setProperty("--background-video-blur", "100px");
+      } else {
+        document.body.style.removeProperty("--background-video-blur");
+      }
+    });
+    const opts = { capture: true, passive: true };
+    scroller.addEventListener("scroll", schedule, opts);
+    this.unsubscribe = () => {
+      schedule.cancel();
+      restoreScrollTop = scroller.scrollTop;
+      scroller.removeEventListener("scroll", schedule, opts);
+    };
   }
 
-  handleScroll = event => {
-    const { scrollTop } = event.target;
-
-    unstable_scheduleWork(() => {
-      //requestAnimationFrame(() => {
-      this.setState({ scrollTop });
-    });
-  };
-
   componentWillUnmount() {
-    restoreScrollTop = this.state.scrollTop;
+    this.unsubscribe();
   }
 
   render() {
     return (
-      <Wrapper
-        className="main-scroller"
-        ref={this.scrollerRef}
-        onScroll={this.handleScroll}
-        style={{ "--scroll-top": `${this.state.scrollTop}px` }}
-      >
+      <>
         <div className="hero">
           <svg className="logo">
             <desc>The logo</desc>
@@ -73,7 +75,7 @@ export default class Index extends PureComponent {
           </a>{" "}
           etc.
         </Credits>
-      </Wrapper>
+      </>
     );
   }
 }
