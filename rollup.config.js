@@ -20,7 +20,7 @@ const plugins = [
       ],
       [require.resolve("react-dom")]: ["unstable_createRoot"],
       [require.resolve("react-is")]: ["isValidElementType"],
-      [require.resolve("schedule")]: ["unstable_scheduleWork"],
+      [require.resolve("scheduler")]: ["unstable_scheduleWork"],
       [require.resolve("simple-cache-provider")]: [
         "createResource",
         "createCache"

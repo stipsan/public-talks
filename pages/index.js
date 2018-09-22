@@ -1,7 +1,7 @@
 // list over stuff
 import React, { PureComponent } from "react";
 import styled from "styled-components";
-import { unstable_scheduleWork } from "schedule";
+import { unstable_scheduleWork } from "scheduler";
 
 import ProductsList from "../components/ProductsList";
 

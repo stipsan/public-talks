@@ -30,7 +30,6 @@ const Main = ({ children }) => (
       )}
     </div>
     <div className="selection-background" />
-    <Footer />
   </>
 );
 
@@ -56,11 +55,6 @@ const CheckoutRoute = props => (
     <Checkout {...props} />
   </Placeholder>
 );
-
-// @TODO temporary, root placeholder will not be needed since each router will have its own
-const RootFallback = "Loading root...";
-
-// @TODO make nav placeholder that can "cancel" loading? Or retry?
 
 unstable_createRoot(document.getElementById("root")).render(
   <Main>

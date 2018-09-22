@@ -74,6 +74,10 @@ module.exports = async (req, res) => {
     });
   }
 
+  if (url.startsWith("/api/")) {
+    return jsonHandler(req, res);
+  }
+
   if (url.endsWith(".js") || url.endsWith(".css") || url.endsWith(".map")) {
     //await sleep(3000)
     return serveHandler(req, res, {
@@ -82,12 +86,9 @@ module.exports = async (req, res) => {
     });
   }
 
-  switch (accepts(req).type(["json", "html"])) {
-    case "json":
-      return jsonHandler(req, res);
-    case "html":
-      return htmlHandler(req, res);
-    default:
-      send(res, 404);
+  if (accepts(req).type("html") === "html") {
+    return htmlHandler(req, res);
   }
+
+  send(res, 404);
 };

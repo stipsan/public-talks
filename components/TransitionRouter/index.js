@@ -9,8 +9,8 @@ const TransitionRouter = props => (
       <TransitionGroup appear component={null}>
         <CSSTransition
           key={location.key}
-          classNames="router"
-          timeout={80000}
+          classNames="slide"
+          timeout={800}
           mountOnEnter
         >
           <Router

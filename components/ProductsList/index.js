@@ -2,28 +2,7 @@
 import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
 import styled, { keyframes } from "styled-components";
-import { cache } from "../../api/cache";
-import { createResource } from "simple-cache-provider";
-
-const thumbnailsResource = createResource(
-  src =>
-    new Promise((resolve, reject) => {
-      console.log("oh oh oho hhh", src);
-      const image = new Image();
-
-      image.onerror = reject;
-      image.addEventListener("load", () => resolve(src));
-      image.addEventListener("error", () => {
-        console.error("error now", src);
-      });
-      /*
-      image.addEventListener('load', () => {
-        requestAnimationFrame(() => resolve(src))
-      })
-      //*/
-      image.src = src;
-    })
-);
+import { cache, ImageResource } from "../../api";
 
 const MasonryColumns = styled.ul`
   list-style: none;
@@ -189,7 +168,7 @@ const SvgFiller = () => (
 );
 
 const ThumbnailImage = props => (
-  <img src={thumbnailsResource.read(cache, props.thumbnail)} />
+  <img src={ImageResource.read(cache, props.thumbnail)} />
 );
 
 const ParallaxProduct = props => {
