@@ -51,11 +51,11 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
 export default class Checkout extends Component {
   render() {
     return (
-      <>
+      <section>
         <BackLink>
           <span>Back to home</span>
         </BackLink>
-      </>
+      </section>
     );
   }
 }

@@ -76,14 +76,14 @@ export default class Product extends Component {
       // nah
     }
     return (
-      <>
+      <section>
         <BackLink>
           <span>Back to home</span>
         </BackLink>
         <div className="product-background">
           <ProductDetails slug={slug} />
         </div>
-      </>
+      </section>
     );
   }
 }
