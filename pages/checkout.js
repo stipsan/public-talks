@@ -67,6 +67,13 @@ export default class Checkout extends Component {
         <BackLink>
           <span>Back to home</span>
         </BackLink>
+        <Consumer>
+          {({ selection, removeFromSelection }) =>
+            selection.map((slug, index) => (
+              <strong onClick={() => removeFromSelection(index)}>{slug}</strong>
+            ))
+          }
+        </Consumer>
       </Wrapper>
     );
   }

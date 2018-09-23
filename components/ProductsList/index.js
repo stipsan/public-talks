@@ -3,6 +3,7 @@ import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
 import styled, { keyframes } from "styled-components";
 import { cache, ImageResource, ProductsResource } from "../../api";
+import { Consumer } from "../SelectionContext";
 
 const MasonryColumns = styled.ul`
   list-style: none;
@@ -35,6 +36,11 @@ const Button = styled(Link)`
   background-image: none;
   white-space: nowrap;
   padding: 6px 12px;
+
+  &:hover {
+    background: #fff;
+    color: #505050;
+  }
 `;
 
 const Title = styled.h2`
@@ -56,11 +62,35 @@ const HoverThumbnail = styled.div`
   background-image: ${props =>
     props.imgUrl ? `url(${JSON.stringify(props.imgUrl)})` : "none"};
   background-size: cover;
+  background-color: #3c444d;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+`;
+
+const ButtonsWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  max-width: 80%;
+  opacity: 0;
+  transition: none;
+
+  > :first-child {
+    margin-bottom: 10px;
+  }
 `;
 
 const ProductWrapper = styled.li`
@@ -115,6 +145,11 @@ const ProductWrapper = styled.li`
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
   }
 
+  &:hover ${ButtonsWrapper} {
+    opacity: 1;
+    transition: opacity var(--slide-duration);
+  }
+
   p {
     font-size: 11px;
     line-height: 18px;
@@ -164,7 +199,7 @@ const ParallaxProduct = props => {
   return (
     <ProductWrapper>
       <Link to={`/product/${slug}`}>
-        <Placeholder delayMs={1000} fallback={ImagePlaceholder}>
+        <Placeholder delayMs={3000} fallback={ImagePlaceholder}>
           <ThumbnailImage thumbnail={thumbnail} />
         </Placeholder>
         <Title>{title}</Title>
@@ -172,6 +207,17 @@ const ParallaxProduct = props => {
         <p>Placement</p>
         <p>{placement}</p>
         <HoverThumbnail imgUrl={thumbnailHover} />
+        <ButtonsWrapper>
+          <Consumer>
+            {({ addToSelection }) => (
+              <Button as="button" onClick={() => addToSelection(slug)}>
+                Add to selection&nbsp;&nbsp;+
+              </Button>
+            )}
+          </Consumer>
+
+          <Button to={`/product/${slug}`}>Learn more</Button>
+        </ButtonsWrapper>
       </Link>
     </ProductWrapper>
   );
