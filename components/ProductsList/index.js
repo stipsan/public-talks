@@ -2,7 +2,7 @@
 import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
 import styled, { keyframes } from "styled-components";
-import { cache, ImageResource } from "../../api";
+import { cache, ImageResource, ProductsResource } from "../../api";
 
 const MasonryColumns = styled.ul`
   list-style: none;
@@ -191,17 +191,21 @@ const ParallaxProduct = props => {
 
 let caches = [];
 export default class ProductsList extends Component {
+  /*
   state = { products: caches };
 
+  
   async componentDidMount() {
     const res = await fetch("/api/products");
     this.setState({ products: await res.json() }, () => {
       caches = this.state.products;
     });
   }
+  //*/
 
   render() {
-    const { products } = this.state;
+    //const { products } = this.state;
+    const products = ProductsResource.read(cache);
 
     return (
       <MasonryColumns>

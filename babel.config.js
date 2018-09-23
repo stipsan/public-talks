@@ -19,7 +19,14 @@ module.exports = api => {
     ],
     plugins: [
       "@babel/plugin-syntax-dynamic-import",
-      ["@babel/plugin-proposal-class-properties", { loose: true }]
+      [
+        "@babel/plugin-proposal-class-properties",
+        { loose: true, pure: true, transpileTemplateLiterals: false }
+      ],
+      [
+        "babel-plugin-styled-components",
+        { displayName: !api.env("production") }
+      ]
     ]
   };
 };

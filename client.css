@@ -68,7 +68,7 @@ textarea {
   width: 58.5%;
   background: #000;
   background-image: none;
-  transition: transform 0.8s, opacity 0.3s;
+  transition: transform 0.8s;
   overflow: hidden;
   contain: strict;
 }
@@ -82,7 +82,6 @@ textarea {
   min-width: 100%;
   min-height: 100%;
   transform: translate(-50%, -50%);
-
   transition: filter 0.8s;
   will-change: filter;
   filter: blur(var(--background-video-blur));
@@ -186,7 +185,10 @@ textarea {
   width: calc(100% - 200px);
   background-color: #fff;
   box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+  overflow: auto;
   overflow-y: auto;
+  overflow-x: hidden;
+  transform: translate3d(0, 0, 0);
 }
 .product-background ul {
   margin: 0;

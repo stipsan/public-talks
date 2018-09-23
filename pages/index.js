@@ -1,11 +1,24 @@
 // list over stuff
-import React, { Component } from "react";
+import React, { Component, Placeholder } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import rafSchd from "raf-schd";
 import cx from "classnames";
 
+import TransitionWrapper from "../components/TransitionWrapper";
 import ProductsList from "../components/ProductsList";
+
+history.scrollRestoration = "manual";
+
+const Wrapper = styled(TransitionWrapper)`
+  text-align: center;
+
+  transform: translateX(-100%);
+
+  .router.index-route & {
+    transform: translateX(0%);
+  }
+`;
 
 const Credits = styled.footer`
   height: 110vh;
@@ -19,11 +32,24 @@ const Credits = styled.footer`
 `;
 
 export default class Index extends Component {
+  state = { matched: !!this.props.match };
+
+  scrollerRef = React.createRef();
+
+  static getDerivedStateFromProps(props, state) {
+    if (!props.match || state.matched) {
+      return null;
+    }
+
+    return { matched: true };
+  }
+
   componentDidMount() {
-    const scroller = ReactDOM.findDOMNode(this).closest(".route");
+    //const scroller = ReactDOM.findDOMNode(this).closest(".route");
+    const scroller = this.scrollerRef.current;
 
     const schedule = rafSchd(({ target: { scrollTop } }) => {
-      document.body.style.setProperty("--scroll-top", `${scrollTop}px`);
+      scroller.style.setProperty("--scroll-top", `${scrollTop}px`);
       if (scrollTop > 0) {
         document.body.style.setProperty("--background-video-blur", "100px");
       } else {
@@ -43,8 +69,10 @@ export default class Index extends Component {
   }
 
   render() {
+    const { matched } = this.state;
+
     return (
-      <>
+      <Wrapper ref={this.scrollerRef}>
         <div className="hero">
           <svg className="logo">
             <desc>The logo</desc>
@@ -57,18 +85,22 @@ export default class Index extends Component {
             </h1>
           </div>
         </div>
-        <ProductsList />
-        <Credits>
-          Link to the{" "}
-          <a
-            target="_blank"
-            href="https://www.bang-olufsen.com/en/collection/wireless-speaker-systems"
-          >
-            original
-          </a>{" "}
-          etc.
-        </Credits>
-      </>
+        {matched && (
+          <Placeholder delayMs={300} fallback={"Loading products..."}>
+            <ProductsList />
+            <Credits>
+              Link to the{" "}
+              <a
+                target="_blank"
+                href="https://www.bang-olufsen.com/en/collection/wireless-speaker-systems"
+              >
+                original
+              </a>{" "}
+              etc.
+            </Credits>
+          </Placeholder>
+        )}
+      </Wrapper>
     );
   }
 }

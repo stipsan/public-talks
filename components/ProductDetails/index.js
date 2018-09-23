@@ -133,8 +133,6 @@ export default class ProductDetails extends Component {
         <Hero>
           {heroVideo ? (
             <SuperVideo
-              // the key ensures that no matter how quickly you switch between two products with videos you're not stuck with the first video
-              key={heroVideo}
               loop
               autoPlay
               playsInline

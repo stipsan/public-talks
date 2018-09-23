@@ -13,7 +13,11 @@ export const ImageResource = createResource(
 );
 
 export const ProductResource = createResource(async slug => {
-  await new Promise(resolve => setTimeout(resolve, 4000));
   const res = await fetch(`/api/products/${slug}`);
+  return res.json();
+});
+
+export const ProductsResource = createResource(async () => {
+  const res = await fetch("/api/products");
   return res.json();
 });

@@ -1,23 +1,16 @@
-import React, { Component, Placeholder } from "react";
+import React, { Component, Placeholder, lazy } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import ProductDetails from "../components/ProductDetails";
+//import ProductDetails from "../components/ProductDetails";
+import TransitionWrapper from "../components/TransitionWrapper";
 
-const TransitionWrapper = styled.div.attrs({ className: "route" })`
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  overflow: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
-  transition: transform var(--slide-duration);
-`;
+const ProductDetails = lazy(() => import("../components/ProductDetails"));
 
 const Wrapper = styled(TransitionWrapper)`
   transform: translateX(-100%);
+  perspective: 1000;
+  backface-visibility: hidden;
 
   .router.product-route & {
     transform: translateX(0%);
@@ -57,30 +50,26 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
     }
   }
 
-  .router-exit &,
-  .router-enter & {
-    opacity: 0;
-  }
-  .router-enter & {
-    transition: none;
-  }
-  .router-exit & {
-    transition: opacity 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
+  opacity: 0;
+
+  .router.product-route & {
+    transition-delay: var(--slide-duration);
+    opacity: 1;
   }
 `;
 
 export default class Product extends Component {
-  state = { slug: this.props.slug };
+  state = { slug: null };
 
   static getDerivedStateFromProps(props) {
-    if (!props.slug) {
+    if (!props.match) {
       return null;
     }
 
-    return { slug: props.slug };
+    return { slug: props.match.slug };
   }
 
-  componentDidUpdate() {}
   render() {
     const { slug } = this.state;
 
@@ -90,9 +79,11 @@ export default class Product extends Component {
           <span>Back to home</span>
         </BackLink>
         <div className="product-background">
-          <Placeholder key={slug} delayMs={300} fallback={"fancy spinner"}>
-            <ProductDetails key={slug} slug={slug} />
-          </Placeholder>
+          {slug && (
+            <Placeholder key={slug} delayMs={300} fallback={"fancy spinner"}>
+              <ProductDetails key={slug} slug={slug} />
+            </Placeholder>
+          )}
         </div>
       </Wrapper>
     );
