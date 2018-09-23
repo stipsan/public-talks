@@ -33,7 +33,7 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
       font-weight: 100;
       margin-right: 10px;
       position: relative;
-      top: 4px;
+      top: 6px;
     }
   }
 
