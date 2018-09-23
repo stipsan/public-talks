@@ -1,9 +1,9 @@
 // list over stuff
 import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { cache, ImageResource, ProductsResource } from "../../api";
-import { Consumer } from "../SelectionContext";
+import { AnimatedSvg } from "../ImagePlaceholder";
 
 const MasonryColumns = styled.ul`
   list-style: none;
@@ -17,7 +17,7 @@ const MasonryColumns = styled.ul`
   top: -300px;
 `;
 
-const Button = styled(Link)`
+const Button = styled.span`
   border: 1px solid white;
   color: white;
   font-size: 13px;
@@ -87,10 +87,6 @@ const ButtonsWrapper = styled.div`
   max-width: 80%;
   opacity: 0;
   transition: none;
-
-  > :first-child {
-    margin-bottom: 10px;
-  }
 `;
 
 const ProductWrapper = styled.li`
@@ -158,36 +154,10 @@ const ProductWrapper = styled.li`
   }
 `;
 
-const placeHolderShimmer = keyframes`
-  0%{
-        background-position: 200% 0;
-    }
-    100%{
-        background-position: -200% 0;
-    }
-`;
-
-const AnimatedSvg = styled.svg`
-  animation-duration: 3s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: ${placeHolderShimmer};
-  animation-timing-function: linear;
-  background: #f6f7f8;
-  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-  background-size: 400% 100%;
-`;
-
 const ImagePlaceholder = (
   <AnimatedSvg width="100%" height="100%" viewBox="0 0 100 100">
     <rect width="100" height="100" fill="transparent" />
   </AnimatedSvg>
-);
-
-const SvgFiller = () => (
-  <svg width="100%" height="100%" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="transparent" />
-  </svg>
 );
 
 const ThumbnailImage = props => (
@@ -198,25 +168,17 @@ const ParallaxProduct = props => {
   const { title, subtitle, thumbnail, thumbnailHover, slug, placement } = props;
   return (
     <ProductWrapper>
-      <Link to={`/product/${slug}`}>
+      <Link to={`/${slug}`}>
         <Placeholder delayMs={3000} fallback={ImagePlaceholder}>
           <ThumbnailImage thumbnail={thumbnail} />
         </Placeholder>
         <Title>{title}</Title>
         {subtitle && <Subtitle>{subtitle}</Subtitle>}
-        <p>Placement</p>
+        <p>Placement:</p>
         <p>{placement}</p>
         <HoverThumbnail imgUrl={thumbnailHover} />
         <ButtonsWrapper>
-          <Consumer>
-            {({ addToSelection }) => (
-              <Button as="button" onClick={() => addToSelection(slug)}>
-                Add to selection&nbsp;&nbsp;+
-              </Button>
-            )}
-          </Consumer>
-
-          <Button to={`/product/${slug}`}>Learn more</Button>
+          <Button>Learn more</Button>
         </ButtonsWrapper>
       </Link>
     </ProductWrapper>

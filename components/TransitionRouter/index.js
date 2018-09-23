@@ -5,8 +5,7 @@ import { Location } from "@reach/router";
 const getRouterClassName = location =>
   cx("router", {
     "index-route": location.pathname === "/",
-    "product-route": location.pathname.startsWith("/product"),
-    "selection-route": location.pathname.endsWith("/selection")
+    "product-route": location.pathname !== "/"
   });
 
 const TransitionRouter = props => (

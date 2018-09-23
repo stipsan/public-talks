@@ -1,36 +1,18 @@
-// list over stuff
-import React, { Component } from "react";
-import { Link } from "@reach/router";
+import React, { Component, Placeholder } from "react";
 import styled from "styled-components";
-import { cache, ProductResource } from "../../api";
+import {
+  cache,
+  ProductResource,
+  ImageResource,
+  VideoResource
+} from "../../api";
+import { AnimatedSvg } from "../ImagePlaceholder";
 
 const Hero = styled.header`
   position: relative;
   width: 100%;
   overflow: hidden;
   padding-top: 56.4%;
-`;
-
-const AddToSelection = styled(Link)`
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #1e1e1e;
-  height: 42px;
-  line-height: 42px;
-  border: 1px solid #505050;
-  padding: 0 30px;
-  transition: all 0.3s;
-
-  &:after {
-    content: " +";
-  }
-
-  &:hover {
-    background: #505050;
-    color: white;
-  }
 `;
 
 const Content = styled.article`
@@ -44,11 +26,19 @@ const Content = styled.article`
     min-height: 1px;
     padding-left: 10px;
     padding-right: 10px;
-    max-width: 50%;
+    width: 50%;
   }
 `;
 
-const LargeThumbnail = styled.img``;
+const LargeThumbnailWrapper = styled.div`
+  margin-right: 40px;
+`;
+const LargeThumbnailImg = styled.img`
+  width: 100%;
+`;
+const LargeThumbnail = ({ src }) => (
+  <LargeThumbnailImg src={ImageResource.read(cache, src)} />
+);
 
 const Details = styled.div`
   color: #4a4a4a;
@@ -105,6 +95,7 @@ const FooterImage = styled.img`
   margin-bottom: -7px;
   width: 100%;
 `;
+const LargeThumbnailFallback = styled(AnimatedSvg)``;
 
 export default class ProductDetails extends Component {
   /*
@@ -139,17 +130,30 @@ export default class ProductDetails extends Component {
               muted
               webkit-playsinline="true"
             >
-              <source src={heroVideo} type="video/mp4" />
+              <source
+                src={VideoResource.read(cache, heroVideo)}
+                type="video/mp4"
+              />
             </SuperVideo>
           ) : (
-            <SuperImage imgUrl={heroImage} />
+            <SuperImage imgUrl={ImageResource.read(cache, heroImage)} />
           )}
         </Hero>
         <Content>
-          <LargeThumbnail src={largeThumbnail} />
+          <LargeThumbnailWrapper>
+            <Placeholder
+              delayMs={300}
+              fallback={
+                <LargeThumbnailFallback>
+                  <rect width="100" height="100" fill="transparent" />
+                </LargeThumbnailFallback>
+              }
+            >
+              <LargeThumbnail src={largeThumbnail} />
+            </Placeholder>
+          </LargeThumbnailWrapper>
           <Details>
             <div dangerouslySetInnerHTML={{ __html: content }} />
-            <AddToSelection to="/selection">Add to selection</AddToSelection>
           </Details>
         </Content>
         <FooterImage src={footerImage} />

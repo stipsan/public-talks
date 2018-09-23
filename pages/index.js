@@ -96,7 +96,6 @@ export default class Index extends Component {
   }
 
   componentDidMount() {
-    //const scroller = ReactDOM.findDOMNode(this).closest(".route");
     const scroller = this.scrollerRef.current;
 
     const schedule = rafSchd(({ target: { scrollTop } }) => {
@@ -125,7 +124,7 @@ export default class Index extends Component {
     return (
       <>
         <Logo />
-        <Wrapper ref={this.scrollerRef}>
+        <Wrapper ref={this.scrollerRef} as="main">
           <div className="hero">
             <svg className="logo">
               <desc>The logo</desc>
@@ -142,14 +141,14 @@ export default class Index extends Component {
             <Placeholder delayMs={300} fallback={<StyledSpinner />}>
               <ProductsList />
               <Credits>
-                Link to the{" "}
+                Link to the&nbsp;
                 <a
                   target="_blank"
                   href="https://www.bang-olufsen.com/en/collection/wireless-speaker-systems"
                 >
                   original
-                </a>{" "}
-                etc.
+                </a>
+                &nbsp; etc.
               </Credits>
             </Placeholder>
           )}

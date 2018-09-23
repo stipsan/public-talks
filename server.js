@@ -65,9 +65,9 @@ const jsonHandler = req => {
 module.exports = async (req, res) => {
   const url = req.url.split("?")[0];
 
-  await sleep(Math.floor(Math.random() * 3000));
-
   if (url.startsWith("/assets/")) {
+    // await sleep(Math.floor(Math.random() * 10000));
+
     return serveHandler(req, res, {
       public: "assets",
       directoryListing: false,
@@ -76,11 +76,14 @@ module.exports = async (req, res) => {
   }
 
   if (url.startsWith("/api/")) {
+    //await sleep(Math.floor(Math.random() * 10000));
+
     return jsonHandler(req, res);
   }
 
   if (url.endsWith(".js") || url.endsWith(".css") || url.endsWith(".map")) {
     //await sleep(3000)
+
     return serveHandler(req, res, {
       public: "public",
       directoryListing: false

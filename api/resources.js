@@ -12,6 +12,18 @@ export const ImageResource = createResource(
     })
 );
 
+export const VideoResource = createResource(
+  src =>
+    new Promise((resolve, reject) => {
+      const video = document.createElement("video");
+
+      video.addEventListener("canplay", () => resolve(src));
+      video.addEventListener("error", reject);
+
+      video.src = src;
+    })
+);
+
 export const ProductResource = createResource(async slug => {
   const res = await fetch(`/api/products/${slug}`);
   return res.json();
