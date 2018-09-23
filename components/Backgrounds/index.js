@@ -1,7 +1,7 @@
 // @TODO remove this, replace with placeholder logic for the image
 const ENABLE_AUTOPLAY = true;
 
-export const Main = ({ children }) => (
+export const Videos = ({ children }) => (
   <>
     {children}
     <div className="background-video">

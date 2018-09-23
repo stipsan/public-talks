@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 import Index from "./pages";
 import Product from "./pages/product";
-import { Main } from "./components/Backgrounds/video";
+import { Videos } from "./components/Backgrounds";
 
 // Wrap each of these in custom placeholder components to maximize UX
 //const Index = lazy(() => import("./pages/index"));
@@ -92,7 +92,7 @@ const SelectionWrapper = styled(TransitionWrapper)`
 `;
 
 unstable_createRoot(document.getElementById("root")).render(
-  <Main>
+  <Videos>
     <TransitionRouter2>
       <Match path="/">{props => <Index {...props} />}</Match>
       <Match path="selection">
@@ -106,5 +106,5 @@ unstable_createRoot(document.getElementById("root")).render(
       </Match>
       <Match path="product/:slug">{props => <Product {...props} />}</Match>
     </TransitionRouter2>
-  </Main>
+  </Videos>
 );
