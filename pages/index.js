@@ -51,9 +51,9 @@ export default class Index extends Component {
     const schedule = rafSchd(({ target: { scrollTop } }) => {
       scroller.style.setProperty("--scroll-top", `${scrollTop}px`);
       if (scrollTop > 0) {
-        document.body.style.setProperty("--background-video-blur", "100px");
+        document.body.style.setProperty("--scroll-active", "1");
       } else {
-        document.body.style.removeProperty("--background-video-blur");
+        document.body.style.removeProperty("--scroll-active");
       }
     });
     const opts = { capture: true, passive: true };

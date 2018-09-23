@@ -34,7 +34,6 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  transition: opacity 0.3s ease-in;
 
   span {
     transform: rotate(90deg) translateY(-18px);
@@ -49,13 +48,16 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
       top: 4px;
     }
   }
-
-  transition: opacity 0.1s ease-out;
   opacity: 0;
 
+  transition: opacity 0.3s ease-out;
+  backface-visibility: hidden;
+  perspective: 1000px;
+
   .router.product-route & {
-    transition-delay: var(--slide-duration);
     opacity: 1;
+    transition-delay: var(--slide-duration);
+    transition-timing-function: ease-out;
   }
 `;
 

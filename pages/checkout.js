@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
+import TransitionWrapper from "../components/TransitionWrapper";
+
 const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
   position: fixed;
   top: 0;
@@ -19,7 +21,6 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  transition: opacity 0.3s ease-in;
 
   span {
     transform: rotate(90deg) translateY(-18px);
@@ -36,26 +37,37 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
     }
   }
 
-  .router-exit &,
-  .router-enter & {
-    opacity: 0;
+  opacity: 0;
+
+  transition: opacity 0.3s ease-out;
+  backface-visibility: hidden;
+  perspective: 1000px;
+
+  .router.selection-route & {
+    opacity: 1;
+    transition-delay: var(--slide-duration);
+    transition-timing-function: ease-out;
   }
-  .router-enter & {
-    transition: none;
-  }
-  .router-exit & {
-    transition: opacity 0.1s ease-out;
+`;
+
+const Wrapper = styled(TransitionWrapper)`
+  transform: translateX(100%);
+  perspective: 1000;
+  backface-visibility: hidden;
+
+  .router.selection-route & {
+    transform: translateX(0%);
   }
 `;
 
 export default class Checkout extends Component {
   render() {
     return (
-      <section>
+      <Wrapper>
         <BackLink>
           <span>Back to home</span>
         </BackLink>
-      </section>
+      </Wrapper>
     );
   }
 }

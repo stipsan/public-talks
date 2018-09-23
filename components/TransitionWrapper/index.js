@@ -10,6 +10,10 @@ const TransitionWrapper = styled.section`
   overflow-x: hidden;
   overflow-y: auto;
   transition: transform var(--slide-duration);
+
+  > * {
+    transform: translate3d(0, 0, 0);
+  }
 `;
 
 export default TransitionWrapper;

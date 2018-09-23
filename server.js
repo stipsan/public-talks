@@ -30,6 +30,7 @@ const htmlHandler = req => {
 <head>
   <meta charset=utf-8>
   <meta content="width=device-width" name=viewport>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="stylesheet" href="/client.css?${cacheBust}" type="text/css"/>
 </head>
 <body>

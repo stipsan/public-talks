@@ -1,15 +1,9 @@
 :root {
   --fontSize: 1rem;
-  --spacing: 1rem;
   --fontColor: #fff;
   --backgroundColor: #827373;
-  --backgroundColorSemi: color-mod(var(--backgroundColor) alpha(50%));
   --selectionBackground: #142537;
-  --primaryColor: #3273dc;
-  --primaryColorSemi: color-mod(var(--primaryColor) alpha(25%));
-  --dangerColor: #ff3860;
-  --dangerColorSemi: color-mod(var(--dangerColor) alpha(25%));
-  --background-video-blur: 0px;
+  --scroll-active: 0;
   --scroll-top: 0px;
   --slide-duration: 800ms;
 }
@@ -31,7 +25,11 @@ a:link {
 html {
   background: var(--backgroundColor);
   box-sizing: border-box;
-  font-family: system-ui;
+  -moz-font-feature-settings: "kern";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+  font-family: "Montserrat", system-ui;
 }
 
 body {
@@ -84,10 +82,10 @@ textarea {
   transform: translate(-50%, -50%);
   transition: filter 0.8s;
   will-change: filter;
-  filter: blur(var(--background-video-blur));
+  filter: blur(calc(var(--scroll-active) * 100px));
 }
 .router:not(.index-route) ~ .background-video {
-  --background-video-blur: 100px;
+  --scroll-active: 1;
 }
 
 .selection-route ~ .background-video {
@@ -167,7 +165,7 @@ textarea {
 }
 .hero .copy h5 {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .hero .copy h1 {
   font-size: calc(100vw / 24.381);

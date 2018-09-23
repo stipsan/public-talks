@@ -76,22 +76,18 @@ const ProductWrapper = styled.li`
 
   &:nth-child(1),
   &:nth-child(2) {
-    transform: translate3d(0, 86px, 0);
     transform: translate3d(0, calc((var(--scroll-top) * -0.1) + 86px), 0);
   }
   &:nth-child(3),
   &:nth-child(4) {
-    transform: translate3d(0, 161px, 0);
     transform: translate3d(0, calc((var(--scroll-top) * -0.3) + 161px), 0);
   }
   &:nth-child(5),
   &:nth-child(6) {
-    transform: translate3d(0, 300px, 0);
     transform: translate3d(0, calc((var(--scroll-top) * -0.3) + 300px), 0);
   }
   &:nth-child(7),
   &:nth-child(8) {
-    transform: translate3d(0, 241px, 0);
     transform: translate3d(0, calc((var(--scroll-top) * -0.1) + 241px), 0);
   }
 
@@ -108,23 +104,15 @@ const ProductWrapper = styled.li`
 
   ${HoverThumbnail} {
     opacity: 0;
+    transform: translate3d(0, 0, 0);
+    box-shadow: none;
+    will-change: box-shadow;
+    transition: box-shadow 0.5s;
   }
 
   &:hover ${HoverThumbnail} {
     opacity: 1;
-  }
-
-  /* @TODO cheap trick to target chrome, refactor away from columns to fix box shadow issues in safari */
-  @supports (contain: strict) {
-    ${HoverThumbnail} {
-      box-shadow: none;
-      will-change: box-shadow;
-      transition: box-shadow 0.5s;
-    }
-
-    &:hover ${HoverThumbnail} {
-      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
-    }
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25);
   }
 
   p {
