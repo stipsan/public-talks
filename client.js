@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 import Index from "./pages";
 import Product from "./pages/product";
-import { Main } from "./video";
+import { Main } from "./components/Backgrounds/video";
 
 // Wrap each of these in custom placeholder components to maximize UX
 //const Index = lazy(() => import("./pages/index"));
