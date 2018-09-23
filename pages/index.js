@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import rafSchd from "raf-schd";
+import cx from "classnames";
 
 import ProductsList from "../components/ProductsList";
 
@@ -17,16 +18,9 @@ const Credits = styled.footer`
   margin-top: -430px;
 `;
 
-const Wrapper = styled.div`
-  text-align: center;
-`;
-let restoreScrollTop = 0;
-
 export default class Index extends Component {
   componentDidMount() {
-    const scroller = ReactDOM.findDOMNode(this).closest(".router");
-
-    scroller.scrollTop = restoreScrollTop;
+    const scroller = ReactDOM.findDOMNode(this).closest(".route");
 
     const schedule = rafSchd(({ target: { scrollTop } }) => {
       document.body.style.setProperty("--scroll-top", `${scrollTop}px`);
@@ -40,7 +34,6 @@ export default class Index extends Component {
     scroller.addEventListener("scroll", schedule, opts);
     this.unsubscribe = () => {
       schedule.cancel();
-      restoreScrollTop = scroller.scrollTop;
       scroller.removeEventListener("scroll", schedule, opts);
     };
   }

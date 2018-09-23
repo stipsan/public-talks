@@ -1,9 +1,28 @@
-// detail page
-import React, { Component } from "react";
+import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
 import ProductDetails from "../components/ProductDetails";
+
+const TransitionWrapper = styled.div.attrs({ className: "route" })`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: transform var(--slide-duration);
+`;
+
+const Wrapper = styled(TransitionWrapper)`
+  transform: translateX(-100%);
+
+  .router.product-route & {
+    transform: translateX(0%);
+  }
+`;
 
 const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
   position: fixed;
@@ -51,39 +70,31 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
 `;
 
 export default class Product extends Component {
-  componentDidUpdate() {
-    try {
-      console.warn(
-        "update",
-        console.log(
-          document.querySelector(".product-background").parentNode.className
-        )
-      );
-    } catch {
-      // nah
+  state = { slug: this.props.slug };
+
+  static getDerivedStateFromProps(props) {
+    if (!props.slug) {
+      return null;
     }
+
+    return { slug: props.slug };
   }
+
+  componentDidUpdate() {}
   render() {
-    const { slug } = this.props;
-    try {
-      console.warn(
-        "render",
-        console.log(
-          document.querySelector(".product-background").parentNode.className
-        )
-      );
-    } catch {
-      // nah
-    }
+    const { slug } = this.state;
+
     return (
-      <section>
+      <Wrapper>
         <BackLink>
           <span>Back to home</span>
         </BackLink>
         <div className="product-background">
-          <ProductDetails slug={slug} />
+          <Placeholder key={slug} delayMs={300} fallback={"fancy spinner"}>
+            <ProductDetails key={slug} slug={slug} />
+          </Placeholder>
         </div>
-      </section>
+      </Wrapper>
     );
   }
 }

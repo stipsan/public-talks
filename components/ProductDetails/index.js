@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
+import { cache, ProductResource } from "../../api";
 
 const Hero = styled.header`
   position: relative;
@@ -106,13 +107,16 @@ const FooterImage = styled.img`
 `;
 
 export default class ProductDetails extends Component {
+  /*
   state = { product: {} };
 
   async componentDidMount() {
     const { slug } = this.props;
     const res = await fetch(`/api/products/${slug}`);
     this.setState({ product: await res.json() });
+    
   }
+  //*/
 
   render() {
     const {
@@ -121,7 +125,8 @@ export default class ProductDetails extends Component {
       footerImage,
       largeThumbnail,
       content
-    } = this.state.product;
+      //} = this.state.product;
+    } = ProductResource.read(cache, this.props.slug);
 
     return (
       <>

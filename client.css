@@ -9,6 +9,9 @@
   --primaryColorSemi: color-mod(var(--primaryColor) alpha(25%));
   --dangerColor: #ff3860;
   --dangerColorSemi: color-mod(var(--dangerColor) alpha(25%));
+  --background-video-blur: 0px;
+  --scroll-top: 0px;
+  --slide-duration: 800ms;
 }
 
 ::before,
@@ -80,13 +83,15 @@ textarea {
   min-height: 100%;
   transform: translate(-50%, -50%);
 
-  transition: -webkit-filter 0.8s, filter 0.8s;
-
-  filter: blur(100px);
+  transition: filter 0.8s;
+  will-change: filter;
+  filter: blur(var(--background-video-blur));
+}
+.router:not(.index-route) ~ .background-video {
+  --background-video-blur: 100px;
 }
 
-.selection-route:matches(.router-enter-done, .router-enter.router-enter-active, .router-appear)
-  ~ .background-video {
+.selection-route ~ .background-video {
   transform: translateX(-141.5%) translateX(100px);
 }
 
@@ -102,22 +107,11 @@ textarea {
   transition: transform 0.8s;
 }
 
-.product-route:matches(.router-enter-done, .router-enter.router-enter-active, .router-appear)
-  ~ .selection-background {
+.product-route ~ .selection-background {
   transform: translateX(100%);
 }
-.selection-route:matches(.router-enter-done, .router-enter.router-enter-active, .router-appear)
-  ~ .selection-background {
+.selection-route ~ .selection-background {
   transform: translateX(0);
-}
-
-.main-scroller {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  overflow: auto;
 }
 
 .router {
@@ -127,14 +121,12 @@ textarea {
   bottom: 0px;
   left: 0px;
   overflow: hidden;
-  transition: all 0.8s;
-  transform: translateX(0%);
-  width: 100vw;
 }
+
 .router-enter {
   transform: translateX(-100%);
 }
-.selection-route.router-enter {
+.selection-route.fade-enter {
   transform: translateX(100%);
 }
 .router-enter.router-enter-active {
@@ -150,26 +142,11 @@ textarea {
 .router-exit {
   transform: translateX(0);
 }
-.product-route.router-exit {
+.product-route.slide-exit {
   transform: translateX(0%) !important;
 }
-.product-route.router-exit.router-exit-active {
+.product-route.slide-exit.slide-exit-active {
   transform: translateX(-100%) !important;
-}
-
-:first-of-type:not(:last-of-type):matches(.product-route, .index-route):not(.router-exit) {
-  transform: translateX(-100%);
-}
-:first-of-type:not(:last-of-type):matches(.selection-route) {
-  transform: translateX(100%);
-}
-.product-route.router-enter-done,
-.product-route.router-enter-active,
-.index-route.router-enter-done,
-.index-route.router-enter-active,
-.selection-route.router-enter-done,
-.selection-route.router-enter-active {
-  transform: translateX(0);
 }
 
 .product-route,

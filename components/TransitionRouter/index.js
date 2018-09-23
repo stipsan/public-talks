@@ -3,6 +3,12 @@ import { Router, Location } from "@reach/router";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import cx from "classnames";
 
+const getDynamicDuration = () =>
+  parseInt(
+    getComputedStyle(document.body).getPropertyValue("--slide-duration"),
+    10
+  );
+
 const TransitionRouter = props => (
   <Location>
     {({ location }) => (
@@ -10,7 +16,9 @@ const TransitionRouter = props => (
         <CSSTransition
           key={location.key}
           classNames="slide"
-          timeout={800}
+          timeout={
+            process.env.NODE_ENV !== "production" ? getDynamicDuration() : 800
+          }
           mountOnEnter
         >
           <Router

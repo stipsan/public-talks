@@ -30,8 +30,10 @@ const plugins = [
   replace({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     // reach/router is trying to use this API but it got removed in react 16.5
+    ///*
     "ReactDOM.unstable_deferredUpdates":
       "typeof requestIdleCallback != 'undefined' ? requestIdleCallback : requestAnimationFrame"
+    //*/
   }),
   babel({ exclude: "node_modules/**" })
 ];
