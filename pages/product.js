@@ -5,6 +5,7 @@ import styled from "styled-components";
 //import ProductDetails from "../components/ProductDetails";
 import TransitionWrapper from "../components/TransitionWrapper";
 import { AnimatedSvg } from "../components/ImagePlaceholder";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const ProductDetails = lazy(() => import("../components/ProductDetails"));
 
@@ -64,7 +65,9 @@ const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
 
 const ProductBackground = styled.div.attrs({
   className: "product-background"
-})``;
+})`
+  color: #4a4a4a;
+`;
 
 export default class Product extends Component {
   state = { slug: null };
@@ -86,18 +89,20 @@ export default class Product extends Component {
           <span>Back to home</span>
         </BackLink>
         <ProductBackground key={slug}>
-          {slug && (
-            <Placeholder
-              delayMs={300}
-              fallback={
-                <AnimatedSvg height="56.4%" viewBox="0 0 100 56.4">
-                  <rect width="100" height="56.4" fill="transparent" />
-                </AnimatedSvg>
-              }
-            >
-              <ProductDetails slug={slug} />
-            </Placeholder>
-          )}
+          <ErrorBoundary>
+            {slug && (
+              <Placeholder
+                delayMs={300}
+                fallback={
+                  <AnimatedSvg height="56.4%" viewBox="0 0 100 56.4">
+                    <rect width="100" height="56.4" fill="transparent" />
+                  </AnimatedSvg>
+                }
+              >
+                <ProductDetails slug={slug} />
+              </Placeholder>
+            )}
+          </ErrorBoundary>
         </ProductBackground>
       </Wrapper>
     );

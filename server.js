@@ -43,8 +43,8 @@ const htmlHandler = req => {
 
 const data = require("./data.json");
 const productDetailsRoute = pathToRegexp("/api/products/:slug");
-const jsonHandler = req => {
-  if (req.url === "/api/products") {
+const jsonHandler = (req, res) => {
+  if (req.url.match(/\/api\/products\/?$/)) {
     // Only send the essential data required to render the list
     return data.map(
       ({ slug, thumbnail, thumbnailHover, title, subtitle, placement }) => ({
@@ -58,8 +58,8 @@ const jsonHandler = req => {
     );
   }
 
-  const [, slug] = productDetailsRoute.exec(req.url);
-  return data.find(product => product.slug === slug);
+  const [, slug] = productDetailsRoute.exec(req.url) || send(res, 404);
+  return data.find(product => product.slug === slug) || send(res, 404);
 };
 
 module.exports = async (req, res) => {

@@ -2848,6 +2848,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
+ky@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-0.3.0.tgz#f783f5f621932d796db0f41c5628f94f42f85924"
+
 lcid@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lcid/-/lcid-1.0.0.tgz#308accafa0bc483a3867b4b6f2b9506251d1b835"

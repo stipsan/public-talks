@@ -41,8 +41,6 @@ const LargeThumbnail = ({ src }) => (
 );
 
 const Details = styled.div`
-  color: #4a4a4a;
-
   p {
     margin: 8px 0 50px;
     color: #505050;
@@ -97,6 +95,21 @@ const FooterImage = styled.img`
 `;
 const LargeThumbnailFallback = styled(AnimatedSvg)``;
 
+const SuperHero = props => {
+  const { heroVideo, heroImage } = props;
+  return (
+    <Hero>
+      {heroVideo ? (
+        <SuperVideo loop autoPlay playsInline muted webkit-playsinline="true">
+          <source src={VideoResource.read(cache, heroVideo)} type="video/mp4" />
+        </SuperVideo>
+      ) : (
+        <SuperImage imgUrl={ImageResource.read(cache, heroImage)} />
+      )}
+    </Hero>
+  );
+};
+
 export default class ProductDetails extends Component {
   /*
   state = { product: {} };
@@ -121,24 +134,16 @@ export default class ProductDetails extends Component {
 
     return (
       <>
-        <Hero>
-          {heroVideo ? (
-            <SuperVideo
-              loop
-              autoPlay
-              playsInline
-              muted
-              webkit-playsinline="true"
-            >
-              <source
-                src={VideoResource.read(cache, heroVideo)}
-                type="video/mp4"
-              />
-            </SuperVideo>
-          ) : (
-            <SuperImage imgUrl={ImageResource.read(cache, heroImage)} />
-          )}
-        </Hero>
+        <Placeholder
+          delayMs={300}
+          fallback={
+            <LargeThumbnailFallback>
+              <rect width="100" height="100" fill="transparent" />
+            </LargeThumbnailFallback>
+          }
+        >
+          <SuperHero heroImage={heroImage} heroVideo={heroVideo} />
+        </Placeholder>
         <Content>
           <LargeThumbnailWrapper>
             <Placeholder
