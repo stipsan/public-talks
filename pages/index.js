@@ -1,12 +1,12 @@
 // list over stuff
-import React, { Component, Placeholder } from "react";
+import React, { Component, Placeholder, lazy } from "react";
 import ReactDOM from "react-dom";
 import styled, { keyframes } from "styled-components";
 import rafSchd from "raf-schd";
 import cx from "classnames";
 
 import TransitionWrapper from "../components/TransitionWrapper";
-import ProductsList from "../components/ProductsList";
+const ProductsList = lazy(() => import("../components/ProductsList"));
 
 const Svg = styled.svg`
   position: absolute;
