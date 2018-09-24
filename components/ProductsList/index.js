@@ -3,7 +3,7 @@ import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 import { cache, ImageResource, ProductsResource } from "../../api";
-import { AnimatedSvg } from "../ImagePlaceholder";
+import { SquarePlaceholder } from "../Placeholders";
 
 const MasonryColumns = styled.ul`
   list-style: none;
@@ -154,12 +154,6 @@ const ProductWrapper = styled.li`
   }
 `;
 
-const ImagePlaceholder = (
-  <AnimatedSvg width="100%" height="100%" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="transparent" />
-  </AnimatedSvg>
-);
-
 const ThumbnailImage = props => (
   <img src={ImageResource.read(cache, props.thumbnail)} />
 );
@@ -169,7 +163,7 @@ const ParallaxProduct = props => {
   return (
     <ProductWrapper>
       <Link to={`/${slug}`}>
-        <Placeholder delayMs={3000} fallback={ImagePlaceholder}>
+        <Placeholder delayMs={1000} fallback={<SquarePlaceholder />}>
           <ThumbnailImage thumbnail={thumbnail} />
         </Placeholder>
         <Title>{title}</Title>

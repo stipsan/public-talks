@@ -2,10 +2,9 @@ import React, { Component, Placeholder, lazy } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-//import ProductDetails from "../components/ProductDetails";
 import TransitionWrapper from "../components/TransitionWrapper";
-import { AnimatedSvg } from "../components/ImagePlaceholder";
 import ErrorBoundary from "../components/ErrorBoundary";
+import { WidePlaceholder } from "../components/Placeholders";
 
 const ProductDetails = lazy(() => import("../components/ProductDetails"));
 
@@ -91,14 +90,7 @@ export default class Product extends Component {
         <ProductBackground key={slug}>
           <ErrorBoundary>
             {slug && (
-              <Placeholder
-                delayMs={300}
-                fallback={
-                  <AnimatedSvg height="56.4%" viewBox="0 0 100 56.4">
-                    <rect width="100" height="56.4" fill="transparent" />
-                  </AnimatedSvg>
-                }
-              >
+              <Placeholder delayMs={300} fallback={<WidePlaceholder />}>
                 <ProductDetails slug={slug} />
               </Placeholder>
             )}

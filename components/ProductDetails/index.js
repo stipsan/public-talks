@@ -6,7 +6,7 @@ import {
   ImageResource,
   VideoResource
 } from "../../api";
-import { AnimatedSvg } from "../ImagePlaceholder";
+import { SquarePlaceholder, WidePlaceholder } from "../Placeholders";
 
 const Hero = styled.header`
   position: relative;
@@ -93,7 +93,6 @@ const FooterImage = styled.img`
   margin-bottom: -7px;
   width: 100%;
 `;
-const LargeThumbnailFallback = styled(AnimatedSvg)``;
 
 const SuperHero = props => {
   const { heroVideo, heroImage } = props;
@@ -134,26 +133,12 @@ export default class ProductDetails extends Component {
 
     return (
       <>
-        <Placeholder
-          delayMs={300}
-          fallback={
-            <LargeThumbnailFallback>
-              <rect width="100" height="100" fill="transparent" />
-            </LargeThumbnailFallback>
-          }
-        >
+        <Placeholder delayMs={300} fallback={<WidePlaceholder />}>
           <SuperHero heroImage={heroImage} heroVideo={heroVideo} />
         </Placeholder>
         <Content>
           <LargeThumbnailWrapper>
-            <Placeholder
-              delayMs={300}
-              fallback={
-                <LargeThumbnailFallback>
-                  <rect width="100" height="100" fill="transparent" />
-                </LargeThumbnailFallback>
-              }
-            >
+            <Placeholder delayMs={300} fallback={<SquarePlaceholder />}>
               <LargeThumbnail src={largeThumbnail} />
             </Placeholder>
           </LargeThumbnailWrapper>
