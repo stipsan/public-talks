@@ -1,23 +1,28 @@
-// list over stuff
-import React, { Component, Placeholder, lazy } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import rafSchd from "raf-schd";
+import Loadable from "react-loadable";
 
 import TransitionWrapper from "../components/TransitionWrapper";
-import { loadProductsListComponent, loadCreditsComponent } from "../api";
+import Credits from "../components/Credits";
+
+import { loadProductsListComponent } from "../api";
 import Spinner from "../components/Spinner";
 
-///*
-const ProductsList = lazy(loadProductsListComponent);
-const Credits = lazy(loadCreditsComponent);
-
-const BelowTheFold = () => (
-  <Placeholder delayMs={200} fallback={<Spinner />}>
-    <ProductsList />
-    <Credits />
-  </Placeholder>
-);
-//*/
+const ProductsList = Loadable({
+  loader: loadProductsListComponent,
+  loading(props) {
+    if (props.pastDelay) {
+      return <Spinner />;
+    } else {
+      return null;
+    }
+  },
+  render(loaded, props) {
+    const Component = loaded.default;
+    return <Component {...props} />;
+  }
+});
 
 const Svg = styled.svg`
   position: absolute;
@@ -102,7 +107,8 @@ export default class Index extends Component {
               </h1>
             </div>
           </div>
-          {matched && <BelowTheFold />}
+          {matched && <ProductsList />}
+          <Credits />
         </Wrapper>
       </>
     );

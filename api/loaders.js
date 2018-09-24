@@ -1,13 +1,8 @@
 import ky from "ky";
 
 const fakeLoadTime = (min = 200, max = 800) =>
-  Math.floor(Math.random() * max + min);
+  Math.floor(Math.random() * max + min) && 0;
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration));
-
-export const loadCreditsComponent = async () => {
-  await sleep(fakeLoadTime());
-  return import("../components/Credits");
-};
 
 export const loadProductsListComponent = async () => {
   await sleep(fakeLoadTime());

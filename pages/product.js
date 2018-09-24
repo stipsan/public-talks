@@ -6,6 +6,7 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import { WidePlaceholder } from "../components/Placeholders";
 import { loadProductDetailsComponent } from "../api";
 import BackLink from "../components/BackLink";
+import { cache, ProductResource } from "../api";
 
 const ProductDetails = lazy(loadProductDetailsComponent);
 
@@ -39,6 +40,11 @@ export default class Product extends Component {
   render() {
     const { slug } = this.state;
 
+    if (slug) {
+      // Start fetching the data in parallel with the dynamic import
+      ProductResource.preload(cache, slug);
+    }
+
     return (
       <Wrapper as="aside">
         <BackLink>
@@ -47,7 +53,7 @@ export default class Product extends Component {
         <ProductBackground key={slug}>
           <ErrorBoundary>
             {slug && (
-              <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
+              <Placeholder delayMs={0} fallback={<WidePlaceholder />}>
                 <ProductDetails slug={slug} />
               </Placeholder>
             )}

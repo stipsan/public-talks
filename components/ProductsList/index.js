@@ -22,23 +22,17 @@ import {
 
 //*/
 class ImageLoader extends Component {
-  state = { src: null, pastDelay: false };
+  state = { src: null };
 
   async componentDidMount() {
-    const timeout = setTimeout(() => this.setState({ pastDelay: true }), 200);
     const src = await loadImage(this.props.src);
-    clearTimeout(timeout);
     this.setState({ src });
   }
 
   render() {
-    const { src, pastDelay } = this.state;
+    const { src } = this.state;
 
-    if (!src) {
-      return pastDelay ? <SquarePlaceholder /> : null;
-    }
-
-    return <img src={src} />;
+    return src ? <img src={src} /> : <SquarePlaceholder />;
   }
 }
 //*/
