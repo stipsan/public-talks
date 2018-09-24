@@ -2,8 +2,14 @@
 import React, { Component, Placeholder } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
-import { cache, ImageResource, ProductsResource } from "../../api";
+import {
+  cache,
+  ImageResource,
+  ProductsResource,
+  loadProducts
+} from "../../api";
 import { SquarePlaceholder } from "../Placeholders";
+import Spinner from "../Spinner";
 
 const MasonryColumns = styled.ul`
   list-style: none;
@@ -160,10 +166,11 @@ const ThumbnailImage = props => (
 
 const ParallaxProduct = props => {
   const { title, subtitle, thumbnail, thumbnailHover, slug, placement } = props;
+
   return (
     <ProductWrapper>
       <Link to={`/${slug}`}>
-        <Placeholder delayMs={1000} fallback={<SquarePlaceholder />}>
+        <Placeholder delayMs={200} fallback={<SquarePlaceholder />}>
           <ThumbnailImage thumbnail={thumbnail} />
         </Placeholder>
         <Title>{title}</Title>
@@ -179,23 +186,30 @@ const ParallaxProduct = props => {
   );
 };
 
-let caches = [];
 export default class ProductsList extends Component {
-  /*
-  state = { products: caches };
+  ///*
 
-  
+  state = { products: [], pastDelay: false };
+
   async componentDidMount() {
-    const res = await fetch("/api/products");
-    this.setState({ products: await res.json() }, () => {
-      caches = this.state.products;
-    });
+    const timeout = setTimeout(() => this.setState({ pastDelay: true }));
+    const products = await loadProducts();
+    clearTimeout(timeout);
+    this.setState({ products });
   }
-  //*/
 
   render() {
-    //const { products } = this.state;
-    const products = ProductsResource.read(cache);
+    const { products, pastDelay } = this.state;
+
+    if (products.length === 0) {
+      return pastDelay ? <Spinner /> : null;
+    }
+    //*/
+
+    /*
+    render() {
+      const products = ProductsResource.read(cache);
+      //*/
 
     return (
       <MasonryColumns>

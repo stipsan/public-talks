@@ -11,7 +11,7 @@ export default class ErrorBoundary extends Component {
     this.state = { error: false };
   }
   componentDidCatch(error) {
-    this.setState({ error: error.message });
+    this.setState({ error: error.message || error });
   }
   render() {
     if (this.state.error) {

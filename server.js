@@ -14,7 +14,6 @@ const browsers = Object.keys(support).reduce(
   []
 );
 
-const sleep = duration => new Promise(resolve => setTimeout(resolve, duration));
 const cacheBust = Date.now();
 
 const htmlHandler = req => {
@@ -66,8 +65,6 @@ module.exports = async (req, res) => {
   const url = req.url.split("?")[0];
 
   if (url.startsWith("/assets/")) {
-    await sleep(Math.floor(Math.random() * 3000));
-
     return serveHandler(req, res, {
       public: "assets",
       directoryListing: false,
@@ -76,13 +73,7 @@ module.exports = async (req, res) => {
   }
 
   if (url.startsWith("/api/")) {
-    await sleep(Math.floor(Math.random() * 3000));
-
     return jsonHandler(req, res);
-  }
-
-  if (url.endsWith("ProductDetails.js") || url.endsWith("ProductsList.js")) {
-    await sleep(Math.floor(Math.random() * 3000));
   }
 
   if (url.endsWith(".js") || url.endsWith(".css") || url.endsWith(".map")) {

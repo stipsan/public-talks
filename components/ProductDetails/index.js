@@ -133,12 +133,12 @@ export default class ProductDetails extends Component {
 
     return (
       <>
-        <Placeholder delayMs={300} fallback={<WidePlaceholder />}>
+        <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
           <SuperHero heroImage={heroImage} heroVideo={heroVideo} />
         </Placeholder>
         <Content>
           <LargeThumbnailWrapper>
-            <Placeholder delayMs={300} fallback={<SquarePlaceholder />}>
+            <Placeholder delayMs={200} fallback={<SquarePlaceholder />}>
               <LargeThumbnail src={largeThumbnail} />
             </Placeholder>
           </LargeThumbnailWrapper>

@@ -5,8 +5,9 @@ import styled from "styled-components";
 import TransitionWrapper from "../components/TransitionWrapper";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { WidePlaceholder } from "../components/Placeholders";
+import { loadProductDetailsComponent } from "../api";
 
-const ProductDetails = lazy(() => import("../components/ProductDetails"));
+const ProductDetails = lazy(loadProductDetailsComponent);
 
 const Wrapper = styled(TransitionWrapper)`
   transform: translateX(-100%);
@@ -90,7 +91,7 @@ export default class Product extends Component {
         <ProductBackground key={slug}>
           <ErrorBoundary>
             {slug && (
-              <Placeholder delayMs={300} fallback={<WidePlaceholder />}>
+              <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
                 <ProductDetails slug={slug} />
               </Placeholder>
             )}
