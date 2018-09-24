@@ -9,19 +9,30 @@ const Footer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-top: 0px;
+
+  h3 {
+  }
+
+  a {
+    color: white;
+  }
 `;
 
 const Credits = () => (
   <Footer>
-    Link to the&nbsp;
+    <strong>This React Suspense demo is based on:&nbsp;</strong>
+    <br />
     <a
       target="_blank"
       href="https://www.bang-olufsen.com/en/collection/wireless-speaker-systems"
     >
-      original
+      bang-olufsen.com/en/collection/wireless-speaker-systems
     </a>
-    &nbsp; etc.
+    <br />
+    All rights for the product photos, videos and the overall design belongs to
+    Bang & Olufsen.
   </Footer>
 );
 
