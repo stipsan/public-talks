@@ -42,6 +42,7 @@ module.exports = {
     "react/no-unused-state": ["error"],
     "react/prop-types": ["warn"],
     "react/react-in-jsx-scope": ["error"],
-    "react/style-prop-object": ["error"]
+    "react/style-prop-object": ["error"],
+    "unicorn/filename-case": "off"
   }
 };

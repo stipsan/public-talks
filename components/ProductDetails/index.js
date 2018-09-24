@@ -94,8 +94,20 @@ const FooterImage = styled.img`
   width: 100%;
 `;
 
+const HeroTitle = styled.h1`
+  color: white;
+  position: absolute;
+  left: 0;
+  top: 39%;
+  right: 0;
+  text-align: center;
+  font-size: 40px;
+  line-height: 50px;
+  transform: translate3d(0, 0, 0);
+`;
+
 const SuperHero = props => {
-  const { heroVideo, heroImage } = props;
+  const { heroVideo, heroImage, children } = props;
   return (
     <Hero>
       {heroVideo ? (
@@ -105,6 +117,7 @@ const SuperHero = props => {
       ) : (
         <SuperImage imgUrl={ImageResource.read(cache, heroImage)} />
       )}
+      {children}
     </Hero>
   );
 };
@@ -127,14 +140,17 @@ export default class ProductDetails extends Component {
       heroVideo,
       footerImage,
       largeThumbnail,
-      content
+      content,
+      title
       //} = this.state.product;
     } = ProductResource.read(cache, this.props.slug);
 
     return (
       <>
         <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
-          <SuperHero heroImage={heroImage} heroVideo={heroVideo} />
+          <SuperHero heroImage={heroImage} heroVideo={heroVideo}>
+            <HeroTitle>{title}</HeroTitle>
+          </SuperHero>
         </Placeholder>
         <Content>
           <LargeThumbnailWrapper>

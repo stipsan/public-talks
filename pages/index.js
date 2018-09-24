@@ -4,10 +4,20 @@ import styled from "styled-components";
 import rafSchd from "raf-schd";
 
 import TransitionWrapper from "../components/TransitionWrapper";
-import { loadProductsListComponent } from "../api";
+import { loadProductsListComponent, loadCreditsComponent } from "../api";
 import Spinner from "../components/Spinner";
 
+///*
 const ProductsList = lazy(loadProductsListComponent);
+const Credits = lazy(loadCreditsComponent);
+
+const BelowTheFold = () => (
+  <Placeholder delayMs={200} fallback={<Spinner />}>
+    <ProductsList />
+    <Credits />
+  </Placeholder>
+);
+//*/
 
 const Svg = styled.svg`
   position: absolute;
@@ -35,17 +45,6 @@ const Wrapper = styled(TransitionWrapper)`
   .router.index-route & {
     transform: translateX(0%);
   }
-`;
-
-const Credits = styled.footer`
-  height: 110vh;
-  margin-left: 60px;
-  margin-right: 60px;
-  background-color: #3c444d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -430px;
 `;
 
 export default class Index extends Component {
@@ -87,22 +86,6 @@ export default class Index extends Component {
   render() {
     const { matched } = this.state;
 
-    const productsList = matched && (
-      <Placeholder delayMs={200} fallback={<Spinner />}>
-        <ProductsList />
-        <Credits>
-          Link to the&nbsp;
-          <a
-            target="_blank"
-            href="https://www.bang-olufsen.com/en/collection/wireless-speaker-systems"
-          >
-            original
-          </a>
-          &nbsp; etc.
-        </Credits>
-      </Placeholder>
-    );
-
     return (
       <>
         <Logo />
@@ -119,7 +102,7 @@ export default class Index extends Component {
               </h1>
             </div>
           </div>
-          {productsList}
+          {matched && <BelowTheFold />}
         </Wrapper>
       </>
     );
