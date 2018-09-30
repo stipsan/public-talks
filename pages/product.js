@@ -53,7 +53,7 @@ export default class Product extends Component {
         <ProductBackground key={slug}>
           <ErrorBoundary>
             {slug && (
-              <Placeholder delayMs={0} fallback={<WidePlaceholder />}>
+              <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
                 <ProductDetails slug={slug} />
               </Placeholder>
             )}

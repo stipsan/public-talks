@@ -25,7 +25,10 @@ const SuperHero = props => {
     <Hero>
       {heroVideo ? (
         <SuperVideo loop autoPlay playsInline muted webkit-playsinline="true">
-          <source src={VideoResource.read(cache, heroVideo)} type="video/mp4" />
+          <source
+            src={VideoResource.preload(cache, heroVideo)}
+            type="video/mp4"
+          />
         </SuperVideo>
       ) : (
         <SuperImage imgUrl={ImageResource.read(cache, heroImage)} />
@@ -48,14 +51,14 @@ export default class ProductDetails extends Component {
 
     return (
       <>
-        <Placeholder delayMs={0} fallback={<WidePlaceholder />}>
+        <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
           <SuperHero heroImage={heroImage} heroVideo={heroVideo}>
             <HeroTitle>{title}</HeroTitle>
           </SuperHero>
         </Placeholder>
         <Content>
           <LargeThumbnailWrapper>
-            <Placeholder delayMs={0} fallback={<SquarePlaceholder />}>
+            <Placeholder delayMs={200} fallback={<SquarePlaceholder />}>
               <ImageLoader src={largeThumbnail} />
             </Placeholder>
           </LargeThumbnailWrapper>

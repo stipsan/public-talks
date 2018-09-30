@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Placeholder, lazy } from "react";
 import styled from "styled-components";
 import rafSchd from "raf-schd";
 import Loadable from "react-loadable";
@@ -9,20 +9,7 @@ import Credits from "../components/Credits";
 import { loadProductsListComponent } from "../api";
 import Spinner from "../components/Spinner";
 
-const ProductsList = Loadable({
-  loader: loadProductsListComponent,
-  loading(props) {
-    if (props.pastDelay) {
-      return <Spinner />;
-    } else {
-      return null;
-    }
-  },
-  render(loaded, props) {
-    const Component = loaded.default;
-    return <Component {...props} />;
-  }
-});
+const ProductsList = lazy(loadProductsListComponent);
 
 const Svg = styled.svg`
   position: absolute;
@@ -107,8 +94,10 @@ export default class Index extends Component {
               </h1>
             </div>
           </div>
-          {matched && <ProductsList />}
-          <Credits />
+          <Placeholder delayMs={200} fallback={<Spinner />}>
+            {matched && <ProductsList />}
+            <Credits />
+          </Placeholder>
         </Wrapper>
       </>
     );

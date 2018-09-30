@@ -20,7 +20,7 @@ import {
   MasonryColumns
 } from "./MasonryColumns";
 
-//*/
+/*
 class ImageLoader extends Component {
   state = { src: null };
 
@@ -36,10 +36,8 @@ class ImageLoader extends Component {
   }
 }
 //*/
-/*
-const ImageLoader = props => (
-  <img src={ImageResource.read(cache, props.src)} />
-);
+///*
+const ImageLoader = props => <img src={ImageResource.read(cache, props.src)} />;
 //*/
 
 const ParallaxProduct = props => {
@@ -48,12 +46,10 @@ const ParallaxProduct = props => {
   return (
     <ProductWrapper>
       <Link to={`/${slug}`}>
-        <ImageLoader src={thumbnail} />
-        {/*
-      <Placeholder delayMs={200} fallback={<SquarePlaceholder />}>
-        <ImageLoader src={thumbnail} />
-      </Placeholder>
-      */}
+        <Placeholder delayMs={200} fallback={<SquarePlaceholder />}>
+          <ImageLoader src={thumbnail} />
+        </Placeholder>
+
         <Title>{title}</Title>
         {subtitle && <Subtitle>{subtitle}</Subtitle>}
         <p>Placement:</p>
@@ -68,7 +64,7 @@ const ParallaxProduct = props => {
 };
 
 export default class ProductsList extends Component {
-  ///*
+  /*
 
   state = { products: [], pastDelay: false };
 
@@ -87,10 +83,10 @@ export default class ProductsList extends Component {
     }
     //*/
 
-    /*
-    render() {
-      const products = ProductsResource.read(cache);
-      //*/
+  ///*
+  render() {
+    const products = ProductsResource.read(cache);
+    //*/
 
     return (
       <MasonryColumns>
