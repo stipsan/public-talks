@@ -20,20 +20,12 @@ const plugins = [
       ],
       [require.resolve("react-dom")]: ["unstable_createRoot"],
       [require.resolve("react-is")]: ["isValidElementType"],
-      [require.resolve("scheduler")]: ["unstable_scheduleWork"],
-      [require.resolve("simple-cache-provider")]: [
-        "createResource",
-        "createCache"
-      ]
+      [require.resolve("scheduler")]: ["unstable_scheduleCallback"],
+      [require.resolve("react-cache")]: ["createResource", "createCache"]
     }
   }),
   replace({
-    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-    // reach/router is trying to use this API but it got removed in react 16.5
-    ///*
-    "ReactDOM.unstable_deferredUpdates":
-      "typeof requestIdleCallback != 'undefined' ? requestIdleCallback : requestAnimationFrame"
-    //*/
+    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
   }),
   babel({ exclude: "node_modules/**" })
 ];

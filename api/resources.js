@@ -1,4 +1,4 @@
-import { createResource } from "simple-cache-provider";
+import { createResource } from "react-cache";
 
 import { loadVideo, loadImage, loadProduct, loadProducts } from "./loaders";
 
