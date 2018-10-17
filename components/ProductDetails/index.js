@@ -25,10 +25,7 @@ const SuperHero = props => {
     <Hero>
       {heroVideo ? (
         <SuperVideo loop autoPlay playsInline muted webkit-playsinline="true">
-          <source
-            src={VideoResource.preload(cache, heroVideo)}
-            type="video/mp4"
-          />
+          <source src={VideoResource.read(cache, heroVideo)} type="video/mp4" />
         </SuperVideo>
       ) : (
         <SuperImage imgUrl={ImageResource.read(cache, heroImage)} />
