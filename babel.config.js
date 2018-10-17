@@ -9,7 +9,7 @@ module.exports = api => {
           loose: true,
           modules: false,
           shippedProposals: true,
-          useBuiltIns: "entry"
+          useBuiltIns: "usage"
         }
       ],
       [
