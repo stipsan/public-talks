@@ -7,7 +7,7 @@ import { terser } from "rollup-plugin-terser";
 const plugins = [
   resolve({ browser: true }),
   commonjs({
-    include: /node_modules/,
+    include: [/node_modules/, /vendor/],
     namedExports: {
       [require.resolve("react")]: [
         "Component",
@@ -27,7 +27,7 @@ const plugins = [
   replace({
     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
   }),
-  babel({ exclude: "node_modules/**" })
+  babel({ exclude: ["node_modules/**", "vendor/**"] })
 ];
 // Minify the JS when in production
 if (process.env.NODE_ENV === "production") {
