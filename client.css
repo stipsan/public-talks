@@ -183,6 +183,7 @@ textarea {
   width: calc(100% - 200px);
   background-color: #fff;
   box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+  -webkit-overflow-scrolling: touch;
   overflow: auto;
   overflow-y: auto;
   overflow-x: hidden;

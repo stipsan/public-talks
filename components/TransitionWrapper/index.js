@@ -6,6 +6,7 @@ const TransitionWrapper = styled.section`
   right: 0px;
   bottom: 0px;
   left: 0px;
+  -webkit-overflow-scrolling: touch;
   overflow: auto;
   overflow-x: hidden;
   overflow-y: auto;

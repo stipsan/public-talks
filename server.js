@@ -61,7 +61,14 @@ const jsonHandler = (req, res) => {
   return data.find(product => product.slug === slug) || send(res, 404);
 };
 
+const production = process.env.NODE_ENV === "production";
+
 module.exports = async (req, res) => {
+  // Very agressive caching in production
+  if (production) {
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+  }
+
   const url = req.url.split("?")[0];
 
   if (url.startsWith("/assets/")) {
@@ -84,6 +91,8 @@ module.exports = async (req, res) => {
   }
 
   if (accepts(req).type("html") === "html") {
+    // As there's a dynamic check for wether import() is supported this response cannot be cached
+    res.removeHeader("Cache-Control");
     return htmlHandler(req, res);
   }
 

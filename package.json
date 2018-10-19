@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "suspense-demo",
   "license": "MIT",
   "repository": {
     "type": "git",
