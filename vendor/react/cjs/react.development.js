@@ -1,4 +1,4 @@
-/** @license React v16.5.2
+/** @license React v16.6.0-beta.0
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== "production") {
 
     // TODO: this is special because it gets imported during build.
 
-    var ReactVersion = "16.5.2";
+    var ReactVersion = "16.6.0-beta.0";
 
     // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
     // nor polyfill, then a plain number is used for performance.
@@ -39,10 +39,9 @@ if (process.env.NODE_ENV !== "production") {
     var REACT_FORWARD_REF_TYPE = hasSymbol
       ? Symbol.for("react.forward_ref")
       : 0xead0;
-    var REACT_PLACEHOLDER_TYPE = hasSymbol
-      ? Symbol.for("react.placeholder")
-      : 0xead1;
-    var REACT_PURE_TYPE = hasSymbol ? Symbol.for("react.pure") : 0xead3;
+    var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for("react.suspense") : 0xead1;
+    var REACT_MEMO_TYPE = hasSymbol ? Symbol.for("react.memo") : 0xead3;
+    var REACT_LAZY_TYPE = hasSymbol ? Symbol.for("react.lazy") : 0xead4;
 
     var MAYBE_ITERATOR_SYMBOL = typeof Symbol === "function" && Symbol.iterator;
     var FAUX_ITERATOR_SYMBOL = "@@iterator";
@@ -59,33 +58,6 @@ if (process.env.NODE_ENV !== "production") {
       }
       return null;
     }
-
-    // Exports ReactDOM.createRoot
-
-    // Suspense
-    var enableSuspense = true;
-    // Helps identify side effects in begin-phase lifecycle hooks and setState reducers:
-
-    // In some cases, StrictMode should also double-render lifecycles.
-    // This can be confusing for tests though,
-    // And it can be bad for performance in production.
-    // This feature flag can be used to control the behavior:
-
-    // To preserve the "Pause on caught exceptions" behavior of the debugger, we
-    // replay the begin phase of a failed component inside invokeGuardedCallback.
-
-    // Warn about deprecated, async-unsafe lifecycles; relates to RFC #6:
-
-    // Gather advanced timing metrics for Profiler subtrees.
-
-    // Trace which interactions trigger each commit.
-
-    // Only used in www builds.
-
-    // Only used in www builds.
-
-    // React Fire: prevent the value and checked attributes from syncing
-    // with their related DOM properties
 
     /**
      * Use invariant() to assert state which your program assumes to be true.
@@ -605,8 +577,18 @@ if (process.env.NODE_ENV !== "production") {
 
     var Resolved = 1;
 
-    function refineResolvedThenable(thenable) {
-      return thenable._reactStatus === Resolved ? thenable._reactResult : null;
+    function refineResolvedLazyComponent(lazyComponent) {
+      return lazyComponent._status === Resolved ? lazyComponent._result : null;
+    }
+
+    function getWrappedName(outerType, innerType, wrapperName) {
+      var functionName = innerType.displayName || innerType.name || "";
+      return (
+        outerType.displayName ||
+        (functionName !== ""
+          ? wrapperName + "(" + functionName + ")"
+          : wrapperName)
+      );
     }
 
     function getComponentName(type) {
@@ -640,8 +622,8 @@ if (process.env.NODE_ENV !== "production") {
           return "Profiler";
         case REACT_STRICT_MODE_TYPE:
           return "StrictMode";
-        case REACT_PLACEHOLDER_TYPE:
-          return "Placeholder";
+        case REACT_SUSPENSE_TYPE:
+          return "Suspense";
       }
       if (typeof type === "object") {
         switch (type.$$typeof) {
@@ -650,20 +632,15 @@ if (process.env.NODE_ENV !== "production") {
           case REACT_PROVIDER_TYPE:
             return "Context.Provider";
           case REACT_FORWARD_REF_TYPE:
-            var renderFn = type.render;
-            var functionName = renderFn.displayName || renderFn.name || "";
-            return (
-              type.displayName ||
-              (functionName !== ""
-                ? "ForwardRef(" + functionName + ")"
-                : "ForwardRef")
-            );
-        }
-        if (typeof type.then === "function") {
-          var thenable = type;
-          var resolvedThenable = refineResolvedThenable(thenable);
-          if (resolvedThenable) {
-            return getComponentName(resolvedThenable);
+            return getWrappedName(type, type.render, "ForwardRef");
+          case REACT_MEMO_TYPE:
+            return getComponentName(type.type);
+          case REACT_LAZY_TYPE: {
+            var thenable = type;
+            var resolvedThenable = refineResolvedLazyComponent(thenable);
+            if (resolvedThenable) {
+              return getComponentName(resolvedThenable);
+            }
           }
         }
       }
@@ -1520,17 +1497,6 @@ if (process.env.NODE_ENV !== "production") {
       return children;
     }
 
-    function readContext(context, observedBits) {
-      var dispatcher = ReactCurrentOwner.currentDispatcher;
-      !(dispatcher !== null)
-        ? invariant(
-            false,
-            "Context.unstable_read(): Context can only be read while React is rendering, e.g. inside the render method or getDerivedStateFromProps."
-          )
-        : void 0;
-      return dispatcher.readContext(context, observedBits);
-    }
-
     function createContext(defaultValue, calculateChangedBits) {
       if (calculateChangedBits === undefined) {
         calculateChangedBits = null;
@@ -1562,16 +1528,77 @@ if (process.env.NODE_ENV !== "production") {
         _currentValue2: defaultValue,
         // These are circular
         Provider: null,
-        Consumer: null,
-        unstable_read: null
+        Consumer: null
       };
 
       context.Provider = {
         $$typeof: REACT_PROVIDER_TYPE,
         _context: context
       };
-      context.Consumer = context;
-      context.unstable_read = readContext.bind(null, context);
+
+      var hasWarnedAboutUsingNestedContextConsumers = false;
+      var hasWarnedAboutUsingConsumerProvider = false;
+
+      {
+        // A separate object, but proxies back to the original context object for
+        // backwards compatibility. It has a different $$typeof, so we can properly
+        // warn for the incorrect usage of Context as a Consumer.
+        var Consumer = {
+          $$typeof: REACT_CONTEXT_TYPE,
+          _context: context,
+          _calculateChangedBits: context._calculateChangedBits
+        };
+        // $FlowFixMe: Flow complains about not setting a value, which is intentional here
+        Object.defineProperties(Consumer, {
+          Provider: {
+            get: function() {
+              if (!hasWarnedAboutUsingConsumerProvider) {
+                hasWarnedAboutUsingConsumerProvider = true;
+                warning$1(
+                  false,
+                  "Rendering <Context.Consumer.Provider> is not supported and will be removed in " +
+                    "a future major release. Did you mean to render <Context.Provider> instead?"
+                );
+              }
+              return context.Provider;
+            },
+            set: function(_Provider) {
+              context.Provider = _Provider;
+            }
+          },
+          _currentValue: {
+            get: function() {
+              return context._currentValue;
+            },
+            set: function(_currentValue) {
+              context._currentValue = _currentValue;
+            }
+          },
+          _currentValue2: {
+            get: function() {
+              return context._currentValue2;
+            },
+            set: function(_currentValue2) {
+              context._currentValue2 = _currentValue2;
+            }
+          },
+          Consumer: {
+            get: function() {
+              if (!hasWarnedAboutUsingNestedContextConsumers) {
+                hasWarnedAboutUsingNestedContextConsumers = true;
+                warning$1(
+                  false,
+                  "Rendering <Context.Consumer.Consumer> is not supported and will be removed in " +
+                    "a future major release. Did you mean to render <Context.Consumer> instead?"
+                );
+              }
+              return context.Consumer;
+            }
+          }
+        });
+        // $FlowFixMe: Flow complains about missing properties because it doesn't understand defineProperty
+        context.Consumer = Consumer;
+      }
 
       {
         context._currentRenderer = null;
@@ -1582,20 +1609,12 @@ if (process.env.NODE_ENV !== "production") {
     }
 
     function lazy(ctor) {
-      var thenable = null;
       return {
-        then: function(resolve, reject) {
-          if (thenable === null) {
-            // Lazily create thenable by wrapping in an extra thenable.
-            thenable = ctor();
-            ctor = null;
-          }
-          return thenable.then(resolve, reject);
-        },
-
+        $$typeof: REACT_LAZY_TYPE,
+        _ctor: ctor,
         // React uses these fields to store the result.
-        _reactStatus: -1,
-        _reactResult: null
+        _status: -1,
+        _result: null
       };
     }
 
@@ -1637,33 +1656,6 @@ if (process.env.NODE_ENV !== "production") {
       };
     }
 
-    function pure(render, compare) {
-      {
-        if (typeof render !== "function") {
-          warningWithoutStack$1(
-            false,
-            "pure: The first argument must be a function component. Instead " +
-              "received: %s",
-            render === null ? "null" : typeof render
-          );
-        } else {
-          var prototype = render.prototype;
-          if (prototype && prototype.isReactComponent) {
-            warningWithoutStack$1(
-              false,
-              "pure: The first argument must be a function component. Classes " +
-                "are not supported. Use React.PureComponent instead."
-            );
-          }
-        }
-      }
-      return {
-        $$typeof: REACT_PURE_TYPE,
-        render: render,
-        compare: compare === undefined ? null : compare
-      };
-    }
-
     function isValidElementType(type) {
       return (
         typeof type === "string" ||
@@ -1673,15 +1665,33 @@ if (process.env.NODE_ENV !== "production") {
         type === REACT_CONCURRENT_MODE_TYPE ||
         type === REACT_PROFILER_TYPE ||
         type === REACT_STRICT_MODE_TYPE ||
-        type === REACT_PLACEHOLDER_TYPE ||
+        type === REACT_SUSPENSE_TYPE ||
         (typeof type === "object" &&
           type !== null &&
-          (typeof type.then === "function" ||
-            type.$$typeof === REACT_PURE_TYPE ||
+          (type.$$typeof === REACT_LAZY_TYPE ||
+            type.$$typeof === REACT_MEMO_TYPE ||
             type.$$typeof === REACT_PROVIDER_TYPE ||
             type.$$typeof === REACT_CONTEXT_TYPE ||
             type.$$typeof === REACT_FORWARD_REF_TYPE))
       );
+    }
+
+    function memo(type, compare) {
+      {
+        if (!isValidElementType(type)) {
+          warningWithoutStack$1(
+            false,
+            "memo: The first argument must be a component. Instead " +
+              "received: %s",
+            type === null ? "null" : typeof type
+          );
+        }
+      }
+      return {
+        $$typeof: REACT_MEMO_TYPE,
+        type: type,
+        compare: compare === undefined ? null : compare
+      };
     }
 
     /**
@@ -2056,11 +2066,13 @@ if (process.env.NODE_ENV !== "production") {
 
       createContext: createContext,
       forwardRef: forwardRef,
-      pure: pure,
+      lazy: lazy,
+      memo: memo,
 
       Fragment: REACT_FRAGMENT_TYPE,
       StrictMode: REACT_STRICT_MODE_TYPE,
       unstable_ConcurrentMode: REACT_CONCURRENT_MODE_TYPE,
+      unstable_Suspense: REACT_SUSPENSE_TYPE,
       unstable_Profiler: REACT_PROFILER_TYPE,
 
       createElement: createElementWithValidation,
@@ -2072,11 +2084,6 @@ if (process.env.NODE_ENV !== "production") {
 
       __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: ReactSharedInternals
     };
-
-    if (enableSuspense) {
-      React.Placeholder = REACT_PLACEHOLDER_TYPE;
-      React.lazy = lazy;
-    }
 
     var React$2 = Object.freeze({
       default: React

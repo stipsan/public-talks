@@ -12,7 +12,7 @@ const plugins = [
       [require.resolve("react")]: [
         "Component",
         "lazy",
-        "Placeholder",
+        "unstable_Suspense",
         "cloneElement",
         "createContext",
         "createElement",

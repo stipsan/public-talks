@@ -1,4 +1,4 @@
-import React, { Component, Placeholder } from "react";
+import React, { Component, unstable_Suspense as Suspense } from "react";
 import {
   cache,
   ProductResource,
@@ -48,16 +48,16 @@ export default class ProductDetails extends Component {
 
     return (
       <>
-        <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
+        <Suspense maxDuration={200} fallback={<WidePlaceholder />}>
           <SuperHero heroImage={heroImage} heroVideo={heroVideo}>
             <HeroTitle>{title}</HeroTitle>
           </SuperHero>
-        </Placeholder>
+        </Suspense>
         <Content>
           <LargeThumbnailWrapper>
-            <Placeholder delayMs={200} fallback={<SquarePlaceholder />}>
+            <Suspense maxDuration={200} fallback={<SquarePlaceholder />}>
               <ImageLoader src={largeThumbnail} />
-            </Placeholder>
+            </Suspense>
           </LargeThumbnailWrapper>
           <Details>
             <div dangerouslySetInnerHTML={{ __html: content }} />

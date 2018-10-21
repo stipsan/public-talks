@@ -1,4 +1,4 @@
-import React, { Component, Placeholder, lazy } from "react";
+import React, { Component, unstable_Suspense as Suspense, lazy } from "react";
 import styled from "styled-components";
 
 import TransitionWrapper from "../components/TransitionWrapper";
@@ -53,9 +53,9 @@ export default class Product extends Component {
         <ProductBackground key={slug}>
           <ErrorBoundary>
             {slug && (
-              <Placeholder delayMs={200} fallback={<WidePlaceholder />}>
+              <Suspense maxDuration={200} fallback={<WidePlaceholder />}>
                 <ProductDetails slug={slug} />
-              </Placeholder>
+              </Suspense>
             )}
           </ErrorBoundary>
         </ProductBackground>

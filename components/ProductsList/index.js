@@ -1,15 +1,8 @@
 // list over stuff
-import React, { Component, Placeholder } from "react";
+import React, { Component, unstable_Suspense as Suspense } from "react";
 import { Link } from "@reach/router";
-import {
-  cache,
-  ImageResource,
-  ProductsResource,
-  loadProducts,
-  loadImage
-} from "../../api";
+import { cache, ImageResource, ProductsResource } from "../../api";
 import { SquarePlaceholder } from "../Placeholders";
-import Spinner from "../Spinner";
 import {
   ProductWrapper,
   Title,
@@ -20,25 +13,7 @@ import {
   MasonryColumns
 } from "./MasonryColumns";
 
-/*
-class ImageLoader extends Component {
-  state = { src: null };
-
-  async componentDidMount() {
-    const src = await loadImage(this.props.src);
-    this.setState({ src });
-  }
-
-  render() {
-    const { src } = this.state;
-
-    return src ? <img src={src} /> : <SquarePlaceholder />;
-  }
-}
-//*/
-///*
 const ImageLoader = props => <img src={ImageResource.read(cache, props.src)} />;
-//*/
 
 const ParallaxProduct = props => {
   const { title, subtitle, thumbnail, thumbnailHover, slug, placement } = props;
@@ -46,9 +21,9 @@ const ParallaxProduct = props => {
   return (
     <ProductWrapper>
       <Link to={`/${slug}`}>
-        <Placeholder delayMs={200} fallback={<SquarePlaceholder />}>
+        <Suspense maxDuration={200} fallback={<SquarePlaceholder />}>
           <ImageLoader src={thumbnail} />
-        </Placeholder>
+        </Suspense>
 
         <Title>{title}</Title>
         {subtitle && <Subtitle>{subtitle}</Subtitle>}
@@ -64,29 +39,8 @@ const ParallaxProduct = props => {
 };
 
 export default class ProductsList extends Component {
-  /*
-
-  state = { products: [], pastDelay: false };
-
-  async componentDidMount() {
-    const timeout = setTimeout(() => this.setState({ pastDelay: true }), 200);
-    const products = await loadProducts();
-    clearTimeout(timeout);
-    this.setState({ products });
-  }
-
-  render() {
-    const { products, pastDelay } = this.state;
-
-    if (products.length === 0) {
-      return pastDelay ? <Spinner /> : null;
-    }
-    //*/
-
-  ///*
   render() {
     const products = ProductsResource.read(cache);
-    //*/
 
     return (
       <MasonryColumns>

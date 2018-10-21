@@ -1,4 +1,4 @@
-import React, { Component, Placeholder, lazy } from "react";
+import React, { Component, unstable_Suspense as Suspense, lazy } from "react";
 import styled from "styled-components";
 import rafSchd from "raf-schd";
 
@@ -93,10 +93,10 @@ export default class Index extends Component {
               </h1>
             </div>
           </div>
-          <Placeholder delayMs={200} fallback={<Spinner />}>
+          <Suspense maxDuration={200} fallback={<Spinner />}>
             {matched && <ProductsList />}
             <Credits />
-          </Placeholder>
+          </Suspense>
         </Wrapper>
       </>
     );
