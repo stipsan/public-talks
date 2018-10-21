@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Footer = styled.footer`
-  height: 110vh;
+  height: 60vh;
   margin-left: 60px;
   margin-right: 60px;
   background-color: #3c444d;

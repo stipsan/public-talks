@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Hero = styled.header`
   position: relative;
   width: 100%;

@@ -30,6 +30,8 @@ html {
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
   font-family: "Montserrat", system-ui;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -42,6 +44,7 @@ body {
   justify-content: center;
   line-height: 1.5;
   margin: 0;
+  padding: 0;
 }
 
 button,
@@ -53,62 +56,6 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-}
-
-.background-video {
-  transform-style: none;
-  z-index: -2;
-  position: fixed;
-  left: 41.5%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 58.5%;
-  background: #000;
-  background-image: none;
-  transition: transform 0.8s;
-  overflow: hidden;
-  contain: strict;
-}
-.background-video :matches(video, img) {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  width: auto;
-  height: auto;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  transition: filter 0.8s;
-  will-change: filter;
-  filter: blur(calc(var(--scroll-active) * 100px));
-}
-.router:not(.index-route) ~ .background-video {
-  --scroll-active: 1;
-}
-
-.selection-route ~ .background-video {
-  transform: translateX(-141.5%) translateX(100px);
-}
-
-.selection-background {
-  background: var(--selectionBackground);
-  z-index: -1;
-  position: fixed;
-  left: 100px;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  transform: translateX(100%) translateX(-100px);
-  transition: transform 0.8s;
-}
-
-.product-route ~ .selection-background {
-  transform: translateX(100%);
-}
-.selection-route ~ .selection-background {
-  transform: translateX(0);
 }
 
 .router {
@@ -123,17 +70,11 @@ textarea {
 .router-enter {
   transform: translateX(-100%);
 }
-.selection-route.fade-enter {
-  transform: translateX(100%);
-}
 .router-enter.router-enter-active {
   transform: translateX(0) !important;
 }
 .router-exit.router-exit-active {
   transform: translateX(-100%);
-}
-.selection-route.router-exit.router-exit-active {
-  transform: translateX(100%);
 }
 
 .router-exit {
@@ -146,8 +87,7 @@ textarea {
   transform: translateX(-100%) !important;
 }
 
-.product-route,
-.selection-route {
+.product-route {
   z-index: 1;
 }
 

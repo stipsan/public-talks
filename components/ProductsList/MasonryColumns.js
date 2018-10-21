@@ -11,6 +11,10 @@ export const MasonryColumns = styled.ul`
   position: relative;
   top: -300px;
   margin-bottom: -200px;
+
+  @media (max-width: 1023px) {
+    column-count: 2;
+  }
 `;
 
 export const Button = styled.span`
@@ -112,6 +116,25 @@ export const ProductWrapper = styled.li`
   &:nth-child(7),
   &:nth-child(8) {
     transform: translate3d(0, calc((var(--scroll-top) * -0.1) + 241px), 0);
+  }
+
+  @media (max-width: 1023px) {
+    &:nth-child(1),
+    &:nth-child(2) {
+      transform: translate3d(0, calc((var(--scroll-top) * -0.1) + 86px), 0);
+    }
+    &:nth-child(3),
+    &:nth-child(4) {
+      transform: translate3d(0, calc((var(--scroll-top) * -0.2) + 270px), 0);
+    }
+    &:nth-child(5),
+    &:nth-child(6) {
+      transform: translate3d(0, calc((var(--scroll-top) * -0.2) + 160px), 0);
+    }
+    &:nth-child(7),
+    &:nth-child(8) {
+      transform: translate3d(0, calc((var(--scroll-top) * -0.1) + 502px), 0);
+    }
   }
 
   > a {

@@ -1,7 +1,6 @@
 import React, { Component, Placeholder, lazy } from "react";
 import styled from "styled-components";
 import rafSchd from "raf-schd";
-import Loadable from "react-loadable";
 
 import TransitionWrapper from "../components/TransitionWrapper";
 import Credits from "../components/Credits";

@@ -25,7 +25,7 @@ module.exports = api => {
       ],
       [
         "babel-plugin-styled-components",
-        { displayName: !api.env("production") }
+        { displayName: !api.env("production"), pure: api.env("production") }
       ]
     ]
   };

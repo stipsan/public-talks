@@ -1,4 +1,4 @@
-import React, { Component, Placeholder } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 
 // @TODO remove this, replace with placeholder logic for the image
@@ -30,12 +30,69 @@ class Video extends Component {
   }
 }
 
+const Wrapper = styled.div`
+  transform-style: none;
+  z-index: -2;
+  position: fixed;
+  left: 41.5%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 58.5%;
+  background: #000;
+  background-image: none;
+  transition: transform 0.8s;
+  overflow: hidden;
+  contain: strict;
+
+  video,
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    transition: filter 0.8s;
+    will-change: filter;
+    filter: blur(calc(var(--scroll-active) * 100px));
+  }
+  .router:not(.index-route) ~ & {
+    --scroll-active: 1;
+  }
+
+  @media (max-width: 1023px) {
+    left: 80px;
+    right: 0;
+    width: auto;
+  }
+`;
+
 export const BackgroundVideo = () => (
-  <div className="background-video">
+  <Wrapper>
     {ENABLE_AUTOPLAY ? <Video /> : <img src="/assets/BO-BG-final.jpg" />}
-  </div>
+  </Wrapper>
 );
 
-export const SelectionBackground = styled.aside.attrs({
-  className: "selection-background"
-})``;
+export const SelectionBackground = styled.aside`
+  background: var(--selectionBackground);
+  z-index: -1;
+  position: fixed;
+  left: 100px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%) translateX(-100px);
+  transition: transform 0.8s;
+
+  .product-route ~ & {
+    transform: translateX(100%);
+  }
+
+  @media (max-width: 1023px) {
+    transform: translateX(100%) translateX(-40px);
+  }
+`;
