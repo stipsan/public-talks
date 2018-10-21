@@ -11,3 +11,6 @@ You can check the demo here: https://suspense-demo-phhvymbtpg.now.sh
 3. `yarn start`
 
 Open [localhost:3000](http://localhost:3000) in a recent version of Chrome, FireFox or Safari.
+
+
+To keep up to date on everything React Suspense I highly recommend https://github.com/sw-yx/fresh-concurrent-react
