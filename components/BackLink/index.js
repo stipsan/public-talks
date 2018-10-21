@@ -7,7 +7,6 @@ export const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
   right: 0;
   bottom: 0;
   width: calc(100vw - 1400px);
-  min-width: 200px;
   z-index: 1;
   color: white;
   text-transform: uppercase;
@@ -18,9 +17,17 @@ export const BackLink = styled(Link).attrs({ className: "back", to: "/" })`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  min-width: 60px;
+
+  @media (min-width: 1023px) {
+    min-width: 200px;
+  }
 
   span {
-    transform: rotate(90deg) translateY(-18px);
+    transform: rotate(90deg) translateY(-35px);
+    white-space: nowrap;
+    width: 290px;
+    display: block;
 
     &:before {
       content: "×";

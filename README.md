@@ -1,8 +1,13 @@
-# public-talks
-Slides and other stuff is all in this repo. Each talk is on its own branch.
+# React Suspense
 
-###### 2018
+## [Meetup organized by ReactJS Oslo at Sopra Steria](https://www.meetup.com/ReactJS-Oslo-Meetup/events/254199802/)
 
-##### May
+You can check the demo here: https://suspense-demo-phhvymbtpg.now.sh
 
-* [Write tests. Not too many. Mostly integration. Use Jest.](https://github.com/stipsan/public-talks/tree/09-05-2018-write-tests-not-too-many-mostly-integration-use-jest)
+# Setup
+
+1. `yarn`
+2. `yarn build`
+3. `yarn start`
+
+Open [localhost:3000](http://localhost:3000) in a recent version of Chrome, FireFox or Safari.

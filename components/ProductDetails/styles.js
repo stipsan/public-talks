@@ -5,19 +5,33 @@ export const Hero = styled.header`
   width: 100%;
   overflow: hidden;
   padding-top: 56.4%;
+
+  @media (max-width: 1023px) {
+    padding-top: 133.333333333%;
+  }
 `;
 export const Content = styled.article`
   display: flex;
   margin-top: 100px;
-  padding-left: 60px;
-  padding-right: 60px;
   align-items: flex-start;
+  padding-left: 15px;
+  padding-right: 15px;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    padding-left: 60px;
+    padding-right: 60px;
+    flex-wrap: nowrap;
+
+    > * {
+      width: 50%;
+    }
+  }
 
   > * {
     min-height: 1px;
     padding-left: 10px;
     padding-right: 10px;
-    width: 50%;
   }
 `;
 export const LargeThumbnailWrapper = styled.div`

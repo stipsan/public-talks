@@ -23,7 +23,7 @@ const htmlHandler = req => {
   });
   const script = supportsDynamicImport
     ? `<script async type="module" src="/esm/client.js?${cacheBust}"></script>`
-    : `<script src="https://unpkg.com/systemjs/dist/system-production.js" type="text/javascript"></script><script>SystemJS.import("/es5/client.js?${cacheBust}");</script>`;
+    : `<script src="https://unpkg.com/systemjs@^0.21.5/dist/system-production.js" type="text/javascript"></script><script>SystemJS.import("/es5/client.js?${cacheBust}");</script>`;
   return `<!doctype html>
 <html>
 <head>

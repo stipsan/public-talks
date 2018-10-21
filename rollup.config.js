@@ -10,16 +10,21 @@ const plugins = [
     include: [/node_modules/, /vendor/],
     namedExports: {
       [require.resolve("react")]: [
-        "Component",
-        "lazy",
-        "unstable_Suspense",
         "cloneElement",
+        "Component",
         "createContext",
         "createElement",
-        "PureComponent"
+        "lazy",
+        "memo",
+        "PureComponent",
+        "unstable_Suspense"
       ],
       [require.resolve("react-dom")]: ["unstable_createRoot"],
-      [require.resolve("react-is")]: ["isValidElementType"],
+      [require.resolve("react-is")]: [
+        "isValidElementType",
+        "isElement",
+        "ForwardRef"
+      ],
       [require.resolve("scheduler")]: ["unstable_scheduleCallback"],
       [require.resolve("react-cache")]: ["createResource", "createCache"]
     }

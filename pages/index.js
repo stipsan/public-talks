@@ -5,10 +5,9 @@ import rafSchd from "raf-schd";
 import TransitionWrapper from "../components/TransitionWrapper";
 import Credits from "../components/Credits";
 
-import { loadProductsListComponent } from "../api";
 import Spinner from "../components/Spinner";
 
-const ProductsList = lazy(loadProductsListComponent);
+const ProductsList = lazy(() => import("../components/ProductsList"));
 
 const Svg = styled.svg`
   position: absolute;
@@ -30,7 +29,10 @@ const Logo = () => (
 
 const Wrapper = styled(TransitionWrapper)`
   text-align: center;
-
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   transform: translateX(-100%);
 
   .router.index-route & {
