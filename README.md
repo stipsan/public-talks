@@ -2,7 +2,7 @@
 
 ## [Meetup organized by ReactJS Oslo at Sopra Steria](https://www.meetup.com/ReactJS-Oslo-Meetup/events/254199802/)
 
-You can check the demo here: https://suspense-demo-phhvymbtpg.now.sh
+You can check the demo here: https://bang-olufsen-react-suspense-demo.now.sh/
 
 # Setup
 
